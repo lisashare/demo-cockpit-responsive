@@ -1,0 +1,2529 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>快道集团驾驶舱</title>
+    <!-- <script src="js/rem.js"></script> -->
+    
+    <link rel="stylesheet" href="https://static.kuaidao.cn/qingteng/wx-css/reset_new.css">
+    <link rel="stylesheet" href="./css/demo.css">
+    <link rel="stylesheet" href="https://static.kuaidao.cn/qingteng/wx-css/swiper.min.css">
+</head>
+
+<body>
+    <div id="wrapper" class="wrapper" v-cloak style="display: none;">
+        <div class="content">
+            <div class="cockpit-header">
+                <div class="header-info-left" v-html="time"></div>
+                <h2>快道集团驾驶舱</h2>
+                <ul class="header-info-right nav-tab">
+                    <li class="active" @click="slide(0)"><i></i>商机盒子</li>
+                    <li @click="slide(1)">小物种</li>
+                    <li style="color: #5A769F;">广州拓展</li>
+                </ul>
+            </div>
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="cockpit-container">
+                            <div class="box-left">
+                                <div class="left-top">
+                                    <h3>{{month}}月推广累计（商机盒子+小物种）</h3>
+                                    <div class="box gauge-box">
+                                        <div class="gauge">
+                                            <div>线索会话</div>
+                                            <p>{{shangjihezi.monthclewconversation?shangjihezi.monthclewconversation:"0"|formatNumber}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="left-center">
+                                    <h3>{{month}}月商务累计</h3>
+                                    <div class="pie-charts02 ">
+                                        <div class="box">
+                                            <div id='echarts_business1' class="echarts_business charts"></div>
+                                        </div>
+                                        <div class="box">
+                                            <div id='echarts_business2' class="echarts_business charts"></div>
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                                <div class="left-bottom">
+                                    <h3>{{month}}月漏斗图</h3>
+                                    <div class="box">
+                                        <div id="funnel-charts" class="charts"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-center">
+                                <div class="center-top">
+                                    <ul>
+                                        <li>
+                                            <div>今日签约量</div>
+                                            <!-- {{shangjihezi.daytotalsignamount?shangjihezi.daytotalsignamount:"0"|formatNumber}} -->
+                                            <p class="number" id='number_1'>
+                                                {{shangjihezi.daytotalsignamount?shangjihezi.daytotalsignamount:"0"|formatNumber}}
+                                            </p>
+                                            <i class="topleft"></i>
+                                            <i class="topright"></i>
+                                            <i class="bottomleft"></i>
+                                            <i class="bottomright"></i>
+                                        </li>
+                                        <li>
+                                            <div>今日签约单量</div>
+                                            <p class="number" id='number_2'>
+                                                {{shangjihezi.daytotalsignsingleamount?shangjihezi.daytotalsignsingleamount:"0"|formatNumber}}
+                                            </p>
+                                            <i class="topleft"></i>
+                                            <i class="topright"></i>
+                                            <i class="bottomleft"></i>
+                                            <i class="bottomright"></i>
+                                        </li>
+                                        <li>
+                                            <div>今日签约金额 <span>(元)</span></div>
+                                            <p class="number" id='number_3'>
+                                                {{shangjihezi.daytotalsignprice?shangjihezi.daytotalsignprice:"0"|formatNumber}}
+                                            </p>
+                                            <i class="topleft"></i>
+                                            <i class="topright"></i>
+                                            <i class="bottomleft"></i>
+                                            <i class="bottomright"></i>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="center-center">
+                                    <div class="map-box box">
+                                        <div class="circle-wrap">
+                                            <span :class="['sign-circle', num==0?'act':'']"><i></i>签约量</span>
+                                            <span :class="['visit-circle', num==1?'act':'']"><i></i>来访量</span>
+                                        </div>
+                                        <div id="map-charts" class="charts"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-right">
+                                <div class="right-top">
+                                    <h3>今日推广统计（商机盒子+小物种）</h3>
+                                    <div class="box">
+                                        <div id="bar-charts" class="charts"></div>
+                                    </div>
+                                </div>
+                                <div class="right-center">
+                                    <h3>今日电销统计</h3>
+                                    <div class="box">
+                                        <div id='echarts_tmk' class="echarts_tmk charts"></div>
+                                    </div>
+                                </div>
+                                <div class="right-bottom">
+                                    <h3>今日商务统计</h3>
+                                    <div class="box">
+                                        <div id="echarts_statistics" class="charts"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="cockpit-container">
+                            <div class="box-left">
+                                <div class="left-top">
+                                    <h3>{{month}}月推广累计（商机盒子+小物种）</h3>
+                                    <div class="box gauge-box">
+                                        <div class="gauge">
+                                            <div>线索会话</div>
+                                            <p>{{xiaowuzhong.monthclewconversation?xiaowuzhong.monthclewconversation:"0"|formatNumber}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="left-center">
+                                    <h3>{{month}}月商务累计</h3>
+                                    <div class="pie-charts02">
+                                        <div class="box"> <div id='echarts_business11' class="echarts_business charts"></div></div>
+                                        <div class="box"> <div id='echarts_business22' class="echarts_business charts"></div></div>
+                                      
+                                    </div>
+                                </div>
+                                <div class="left-bottom">
+                                    <h3>{{month}}月漏斗图</h3>
+                                    <div class="box">
+                                        <div id="funnel-charts2" class="charts"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-center">
+                                <div class="center-top">
+                                    <ul>
+                                        <li>
+                                            <div>今日签约量</div>
+                                            <p class="number" id='number_4'>
+                                                {{xiaowuzhong.daytotalsignamount?xiaowuzhong.daytotalsignamount:"0"|formatNumber}}
+                                            </p>
+                                            <i class="topleft"></i>
+                                            <i class="topright"></i>
+                                            <i class="bottomleft"></i>
+                                            <i class="bottomright"></i>
+                                        </li>
+                                        <li>
+                                            <div>今日签约单量</div>
+                                            <p class="number" id='number_5'>
+                                                {{xiaowuzhong.daytotalsignsingleamount?xiaowuzhong.daytotalsignsingleamount:"0"|formatNumber}}
+                                            </p>
+                                            <i class="topleft"></i>
+                                            <i class="topright"></i>
+                                            <i class="bottomleft"></i>
+                                            <i class="bottomright"></i>
+                                        </li>
+                                        <li>
+                                            <div>今日签约金额 <span>(元)</span></div>
+                                            <p class="number" id='number_6'>
+                                                {{xiaowuzhong.daytotalsignprice?xiaowuzhong.daytotalsignprice:"0"|formatNumber}}
+                                            </p>
+                                            <i class="topleft"></i>
+                                            <i class="topright"></i>
+                                            <i class="bottomleft"></i>
+                                            <i class="bottomright"></i>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="center-center">
+                                    <div class="map-box box">
+                                        <div class="circle-wrap">
+                                            <span :class="['sign-circle', num2==0?'act':'']"><i></i>签约量</span>
+                                            <span :class="['visit-circle', num2==1?'act':'']"><i></i>来访量</span>
+                                        </div>
+                                        <div id="map-charts2" class="charts"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-right">
+                                <div class="right-top">
+                                    <h3>今日推广统计（商机盒子+小物种）</h3>
+                                    <div class="box">
+                                        <div id="bar-charts2" class="charts"></div>
+                                    </div>
+                                </div>
+                                <div class="right-center">
+                                    <h3>今日电销统计</h3>
+                                    <div class="box">
+                                        <div id='echarts_tmk2' class="echarts_tmk charts"></div>
+                                    </div>
+                                </div>
+                                <div class="right-bottom">
+                                    <h3>今日商务统计</h3>
+                                    <div class="box">
+                                        <div id="echarts_statistics2" class="charts"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://static.kuaidao.cn/qingteng/wx-js/vue.min.js"></script>
+    <script src="https://static.kuaidao.cn/qingteng/wx-js/axios.min.js"></script>
+    <script src="https://static.kuaidao.cn/qingteng/wx-js/qs.min.js"></script>
+    <script src="https://static.kuaidao.cn/qingteng/wx-js/jquery-1.10.1.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/countUp.js"></script>
+    <script src="./js/echarts.min.js"></script>
+    <script src="https://static.kuaidao.cn/qingteng/wx-js/swiper.jquery.js"></script>
+    <script src="js/map/china.js"></script>
+    <script src="json/demo.js"></script>
+    <script src="mock/data.js"></script>
+
+    <script>
+        var res = DataList;
+        var mainVM = new Vue({
+            el: '#wrapper',
+            data: {
+                count1: null,
+                count2: null,
+                count3: null,
+                count4: null,
+                count5: null,
+                count6: null,
+                countNumber: 111,
+                mapTimer: null,
+                mapTimer2: null,
+                shangjihezi: '',
+                xiaowuzhong: '',
+                mySwiper: null,
+                mapCharts: null,
+                mapCharts2: null,
+                time: "<span>00</span>年<span>00</span>月<span>00</span>日 &nbsp;&nbsp;&nbsp;&nbsp;<span>00</span><i> : </i><span>00</span><i> : </i><span>00</span>",
+                month: "",
+                num: 0,
+                num2: 0,
+                arr: [],
+                arr2: [],
+                sjTotalData: {
+                    totalDayResourceAmount: "2500", // 日资源总量
+                    totalDayCallAmount: "2500", // 日通话总量
+                    totalDayInvitationAmount: "100", // 日邀约量
+
+                    totalDayComeAmount: "100", // 日来访量
+                    totalDaySignAmount: "50", // 日签约量
+                    totalDaySignSingleAmount: "7", // 日签约单量
+                    totalDaySignPrice: "333333", // 日签约金额
+
+                    totalMonthSignSingleAmount: "200", // 月签约单量
+                    totalMonthSignPrice: "10000000", // 月签约金额
+                },
+                xwzTotalData: {
+                    totalDayResourceAmount: "10000", // 日资源总量
+                    totalDayCallAmount: "10000", // 日通话总量
+                    totalDayInvitationAmount: "300", // 日邀约量
+
+                    totalDayComeAmount: "300", // 日来访量
+                    totalDaySignAmount: "100", // 日签约量
+                    totalDaySignSingleAmount: "67", // 日签约单量
+                    totalDaySignPrice: "3333333", // 日签约金额
+
+                    totalMonthSignSingleAmount: "2000", // 月签约单量
+                    totalMonthSignPrice: "100000000", // 月签约金额
+                },
+                sjEcharts: {
+                    myChartOne: '',
+                    myChartTwo: '',
+                    myChartTmk: '',
+                    myChartStatistics: '',
+                    visitData: [],
+                    signData: [],
+                    funnelCharts: null,
+                    barCharts: null,
+                },
+                xwzEcharts: {
+                    myChartOne: '',
+                    myChartTwo: '',
+                    myChartTmk: '',
+                    myChartStatistics: '',
+                    visitData: [],
+                    signData: [],
+                    funnelCharts: null,
+                    barCharts: null,
+                },
+            },
+            filters: {
+                formatNumber(value) {
+                    var nStr = value;
+                    if (!nStr) {
+                        return nStr;
+                    }
+                    nStr += '';
+                    x = nStr.split('.');
+                    x1 = x[0];
+                    // if(!x[1]){
+                    //     x[1] = '00';
+                    // }  
+                    x2 = x.length > 1 ? '.' + x[1] : '';
+                    var rgx = /(\d+)(\d{3})/;
+                    while (rgx.test(x1)) {
+                        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+                    }
+                    return x1 + x2;
+                },
+            },
+            methods: {
+                fontSize(res) {
+                    let docEl = document.documentElement,
+                        clientWidth = window.innerWidth || document.documentElement.clientWidth || document.body
+                        .clientWidth;
+                    if (!clientWidth) return;
+                    let fontSize = 100 * (clientWidth / 1980);
+                    return res * fontSize;
+                },
+                //分割逗号
+                formatNumber(value) {
+                    var nStr = value;
+                    if (!nStr) {
+                        return nStr;
+                    }
+                    nStr += '';
+                    x = nStr.split('.');
+                    x1 = x[0];
+                    // if(!x[1]){
+                    //     x[1] = '00';
+                    // }  
+                    x2 = x.length > 1 ? '.' + x[1] : '';
+                    var rgx = /(\d+)(\d{3})/;
+                    while (rgx.test(x1)) {
+                        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+                    }
+                    return x1 + x2;
+                },
+                dataFormat() {
+                    var time = new Date();
+                    return `<span>${time.getFullYear()}</span>年<span>${time.getMonth() + 1 >= 10 ? (time.getMonth() + 1) : '0' + (time.getMonth() + 1)}</span>月<span>${time.getDate() >= 10 ? time.getDate() : '0' + time.getDate()}</span>日 &nbsp;&nbsp;&nbsp;&nbsp;
+                            <span>${time.getHours() >= 10 ? time.getHours() : '0' + time.getHours()}</span><i> : </i><span>${time.getMinutes()>=10?time.getMinutes():'0'+time.getMinutes()}</span><i> : </i><span>${time.getSeconds() >= 10 ? time.getSeconds() : '0' + time.getSeconds()}</span>`;
+                },
+                slide(i) {
+                    $('.nav-tab li').removeClass('active').eq(i).addClass('active');
+                    this.mySwiper.slideTo(i, 1000, false);
+                },
+                //商务统计 
+                initEchartsByStatistics(daySign, dayCome, daySignSingle, daySignPrice, totalData) {
+                    // totalDayComeAmount: "10000", // 日来访量
+                    // totalDaySignAmount: "10000", // 日签约量
+                    // totalDaySignSingleAmount: "10000", // 日签约单量
+                    // totalDaySignPrice: "10000", // 日签约金额
+                    this.sjEcharts.myChartStatistics = echarts.init(document.getElementById(
+                        'echarts_statistics'));
+                    this.sjEcharts.myChartStatistics.clear()
+                    option = {
+                        radar: {
+                            shape: 'circle',
+                            radius: '80%',
+                            center: ['50%', '48%'],
+                            startAngle: 45,
+                            // splitNumber: 4,
+                            name: {
+                                color: '#fff',
+                                padding: [0, 20, 0, 20],
+                                formatter: function (value, indicator) {
+                                    if (value == '签约金额') {
+                                        return '{a|' + value + '}{c|(元)}\n{b|' + indicator.num + '}'
+                                    } else {
+                                        return '{a|' + value + '}\n{b|' + indicator.num + '}'
+                                    }
+                                },
+                                lineHeight: 20,
+                                rich: {
+                                    a: {
+                                        color: '#fff',
+                                        fontSize: this.fontSize(0.14),
+                                        align: 'center'
+                                    },
+                                    b: {
+                                        color: '#27DBF3',
+                                        fontSize: this.fontSize(0.16),
+                                        align: 'center'
+                                    },
+                                    c: {
+                                        color: '#fff',
+                                        fontSize: this.fontSize(0.10),
+                                        padding: [0, 0, 0, 4]
+                                    }
+                                }
+                            },
+                            axisLine: {
+                                lineStyle: {
+                                    width: 2,
+                                    color: '#254999',
+                                }
+                            },
+                            splitLine: {
+                                show: true,
+                                lineStyle: {
+                                    width: 2,
+                                    type: 'solid',
+                                    color: '#254999'
+                                },
+                            },
+                            splitArea: {
+                                show: false
+                            },
+                            indicator: [{
+                                    name: '签约量',
+                                    max: totalData.totalDaySignAmount,
+                                    num: daySign
+                                },
+                                {
+                                    name: '来访量',
+                                    max: totalData.totalDayComeAmount,
+                                    num: dayCome
+                                },
+                                {
+                                    name: '签约单量',
+                                    max: totalData.totalDaySignSingleAmount,
+                                    num: daySignSingle
+                                },
+                                {
+                                    name: '签约金额',
+                                    max: totalData.totalDaySignPrice,
+                                    num: daySignPrice
+                                },
+                            ],
+
+                        },
+                        series: [{
+                            name: '认证用户',
+                            type: 'radar',
+                            data: [{
+                                // symbol: icon,
+                                symbolSize: 6,
+                                value: [daySign, dayCome, daySignSingle, daySignPrice],
+                                lineStyle: {
+                                    width: 2,
+                                    color: new echarts.graphic.LinearGradient(0, 0, 1, 1, [{
+                                        offset: 0,
+                                        color: '#2AEDFE'
+                                    }, {
+                                        offset: 1,
+                                        color: '#e00d6c'
+                                    }])
+                                },
+                                areaStyle: {
+                                    normal: {
+                                        color: 'rgba(42, 84, 173, 0.8)'
+                                    },
+                                }
+                            }],
+                        }]
+
+                    }
+                    this.sjEcharts.myChartStatistics.setOption(option);
+                },
+                //商务统计 2
+                initEchartsByStatistics2(daySign, dayCome, daySignSingle, daySignPrice, totalData) {
+                    this.xwzEcharts.myChartStatistics = echarts.init(document.getElementById(
+                        'echarts_statistics2'));
+                    this.xwzEcharts.myChartStatistics.clear()
+                    option = {
+                        radar: {
+                            shape: 'circle',
+                            radius: '80%',
+                            center: ['50%', '48%'],
+                            startAngle: 45,
+                            // splitNumber: 4,
+                            name: {
+                                color: '#fff',
+                                padding: [0, 20, 0, 20],
+                                formatter: function (value, indicator) {
+                                    if (value == '签约金额') {
+                                        return '{a|' + value + '}{c|(元)}\n{b|' + indicator.num + '}'
+                                    } else {
+                                        return '{a|' + value + '}\n{b|' + indicator.num + '}'
+                                    }
+                                },
+                                lineHeight: 20,
+                                rich: {
+                                    a: {
+                                        color: '#fff',
+                                        fontSize: this.fontSize(0.14),
+                                        align: 'center'
+                                    },
+                                    b: {
+                                        color: '#27DBF3',
+                                        fontSize: this.fontSize(0.16),
+                                        align: 'center'
+                                    },
+                                    c: {
+                                        color: '#fff',
+                                        fontSize: this.fontSize(0.10),
+                                        padding: [0, 0, 0, 4]
+                                    }
+                                }
+                            },
+                            axisLine: {
+                                lineStyle: {
+                                    width: 2,
+                                    color: '#254999',
+                                }
+                            },
+                            splitLine: {
+                                show: true,
+                                lineStyle: {
+                                    width: 2,
+                                    type: 'solid',
+                                    color: '#254999'
+                                },
+                            },
+                            splitArea: {
+                                show: false
+                            },
+                            indicator: [{
+                                    name: '签约量',
+                                    max: totalData.totalDaySignAmount,
+                                    num: daySign
+                                },
+                                {
+                                    name: '来访量',
+                                    max: totalData.totalDayComeAmount,
+                                    num: dayCome
+                                },
+                                {
+                                    name: '签约单量',
+                                    max: totalData.totalDaySignSingleAmount,
+                                    num: daySignSingle
+                                },
+                                {
+                                    name: '签约金额',
+                                    max: totalData.totalDaySignPrice,
+                                    num: daySignPrice
+                                },
+                            ],
+
+                        },
+                        series: [{
+                            name: '认证用户',
+                            type: 'radar',
+                            data: [{
+                                // symbol: icon,
+                                symbolSize: 6,
+                                value: [daySign, dayCome, daySignSingle, daySignPrice],
+                                lineStyle: {
+                                    width: 2,
+                                    color: new echarts.graphic.LinearGradient(0, 0, 1, 1, [{
+                                        offset: 0,
+                                        color: '#2AEDFE'
+                                    }, {
+                                        offset: 1,
+                                        color: '#e00d6c'
+                                    }])
+                                },
+                                areaStyle: {
+                                    normal: {
+                                        color: 'rgba(42, 84, 173, 0.8)'
+                                    },
+                                }
+                            }],
+                        }]
+
+                    }
+                    this.xwzEcharts.myChartStatistics.setOption(option);
+                },
+                //电销统计
+                arrayObj(array, key) {
+                    var resObj = {};
+                    for (var i = 0; i < array.length; i++) {
+                        resObj[array[i][key]] = array[i];
+                    }
+                    return resObj;
+                },
+                initEchartsByTmk(resource, invitation, call, totalNum) {
+                    var _this = this
+                    var dataMock = [{
+                            name: "资源量",
+                            value: resource,
+                            radiusArr: ['73.5%', '85%'],
+                            color: '#1b6bee',
+                            total: totalNum.totalDayResourceAmount
+
+                        },
+                        {
+                            name: "邀约量",
+                            value: invitation,
+                            radiusArr: ['53.5%', '65%'],
+                            color: '#1bb7c4',
+                            total: totalNum.totalDayInvitationAmount
+                        },
+                        {
+                            name: "通话量",
+                            value: call,
+                            radiusArr: ['33.5%', '45%'],
+                            color: '#e530a3',
+                            total: totalNum.totalDayCallAmount
+                        },
+
+                    ]
+                    var dataName = []
+                    this.sjEcharts.myChartTmk = echarts.init(document.getElementById('echarts_tmk'));
+                    this.sjEcharts.myChartTmk.clear()
+                    var dataStyle = {
+                        normal: {
+                            label: {
+                                show: false
+                            },
+                            labelLine: {
+                                show: false
+                            },
+                            shadowBlur: 40,
+                            borderWidth: 10,
+                            shadowColor: 'rgba(0, 0, 0, 0)' //边框阴影
+                        }
+                    };
+                    var placeHolderStyle = {
+                        normal: {
+                            color: '#254999',
+                            label: {
+                                show: false
+                            },
+                            labelLine: {
+                                show: false
+                            }
+                        },
+                        emphasis: {
+                            color: '#254999'
+                        }
+                    };
+                    option = {
+                        legend: {
+                            // show: true,
+                            orient: 'vertical',
+                            align: 'left',
+                            icon: "circle",
+                            top: "center",
+                            right: '18%',
+                            data: dataMock,
+                            padding: [0, 2],
+                            itemWidth: 8,
+                            formatter: function (name, value) {
+                                return "{title|" + name + "}     {value|" + (_this.arrayObj(dataMock,
+                                    "name")[name].value) + "}"
+                            },
+                            selectedMode:false,
+                            textStyle: {
+                                rich: {
+                                    title: {
+                                        fontSize: this.fontSize(0.14),
+                                        lineHeight: 15,
+                                        color: "rgb(255, 255, 255)"
+                                    },
+                                    value: {
+                                        fontSize: this.fontSize(0.16),
+                                        lineHeight: 20,
+                                        color: "#27DBF3"
+                                    }
+                                }
+                            },
+                        },
+                        series: dataMock.map((item, index) => {
+                            return {
+                                type: 'pie',
+                                clockWise: false,
+                                radius: item.radiusArr,
+                                center: ['30%', '50%'],
+                                itemStyle: dataStyle,
+                                hoverAnimation: false,
+                                startAngle: 90,
+                                data: [{
+                                        value: item.value,
+                                        name: item.name,
+                                        itemStyle: {
+                                            normal: {
+                                                color: item.color,
+                                            }
+                                        }
+                                    },
+                                    {
+                                        value: item.total - item.value,
+                                        name: '',
+                                        tooltip: {
+                                            show: false
+                                        },
+                                        itemStyle: placeHolderStyle
+                                    },
+                                ]
+                            }
+                        })
+                    };
+                    this.sjEcharts.myChartTmk.setOption(option);
+                },
+                //电销统计2
+                initEchartsByTmk2(resource, invitation, call, totalNum) {
+                    var _this = this
+                    var dataMock = [{
+                            name: "资源量",
+                            value: resource,
+                            radiusArr: ['73.5%', '85%'],
+                            color: '#1b6bee',
+                            total: totalNum.totalDayResourceAmount
+
+                        },
+                        {
+                            name: "邀约量",
+                            value: invitation,
+                            radiusArr: ['53.5%', '65%'],
+                            color: '#1bb7c4',
+                            total: totalNum.totalDayInvitationAmount
+                        },
+                        {
+                            name: "通话量",
+                            value: call,
+                            radiusArr: ['33.5%', '45%'],
+                            color: '#e530a3',
+                            total: totalNum.totalDayCallAmount
+                        },
+
+                    ]
+                    var dataName = []
+                    this.xwzEcharts.myChartTmk = echarts.init(document.getElementById('echarts_tmk2'));
+                    this.xwzEcharts.myChartTmk.clear()
+                    var dataStyle = {
+                        normal: {
+                            label: {
+                                show: false
+                            },
+                            labelLine: {
+                                show: false
+                            },
+                            shadowBlur: 40,
+                            borderWidth: 10,
+                            shadowColor: 'rgba(0, 0, 0, 0)' //边框阴影
+                        }
+                    };
+                    var placeHolderStyle = {
+                        normal: {
+                            color: '#254999',
+                            label: {
+                                show: false
+                            },
+                            labelLine: {
+                                show: false
+                            }
+                        },
+                        emphasis: {
+                            color: '#254999'
+                        }
+                    };
+                    option = {
+                        legend: {
+                            // show: true,
+                            orient: 'vertical',
+                            align: 'left',
+                            icon: "circle",
+                            top: "center",
+                            right: '18%',
+                            data: dataMock,
+                            padding: [0, 2],
+                            itemWidth: 8,
+                            formatter: function (name, value) {
+                                return "{title|" + name + "}     {value|" + (_this.arrayObj(dataMock,
+                                    "name")[name].value) + "}"
+                            },
+                            selectedMode:false,
+                            textStyle: {
+                                rich: {
+                                    title: {
+                                        fontSize: this.fontSize(0.14),
+                                        lineHeight: 15,
+                                        color: "rgb(255, 255, 255)"
+                                    },
+                                    value: {
+                                        fontSize: this.fontSize(0.16),
+                                        lineHeight: 20,
+                                        color: "#27DBF3"
+                                    }
+                                }
+                            },
+                        },
+                        series: dataMock.map((item, index) => {
+                            return {
+                                type: 'pie',
+                                clockWise: false,
+                                radius: item.radiusArr,
+                                center: ['30%', '50%'],
+                                itemStyle: dataStyle,
+                                hoverAnimation: false,
+                                startAngle: 90,
+                                data: [{
+                                        value: item.value,
+                                        name: item.name,
+                                        itemStyle: {
+                                            normal: {
+                                                color: item.color,
+                                            }
+                                        }
+                                    },
+                                    {
+                                        value: item.total - item.value,
+                                        name: '',
+                                        tooltip: {
+                                            show: false
+                                        },
+                                        itemStyle: placeHolderStyle
+                                    },
+                                ]
+                            }
+                        })
+                    };
+                    this.xwzEcharts.myChartTmk.setOption(option);
+                },
+
+                //商务累计1
+                initEchartsByBusinessOne(jsonData, totalNum) {
+                    this.sjEcharts.myChartOne = echarts.init(document.getElementById('echarts_business1'));
+                    this.sjEcharts.myChartOne.clear();
+                    var data2 = [];
+                    for (var i = 0; i < 4; i++) {
+                        data2.push({
+                            value: 80,
+                            itemStyle: {
+                                normal: {
+                                    borderWidth: 1,
+                                    /* shadowBlur: 30,*/
+                                    borderColor: new echarts.graphic.LinearGradient(0, 0, 1, 1, [{
+                                        offset: 0,
+                                        color: '#2AEDFE'
+                                    }, {
+                                        offset: 1,
+                                        color: '#2AEDFE'
+                                    }]),
+                                }
+                            }
+                        }, {
+                            value: 40,
+                        });
+                    }
+                    var seriesObj = [{
+                            type: 'pie',
+                            radius: ['58%', '70%'],
+                            avoidLabelOverlap: false,
+                            hoverAnimation: false,
+                            label: {
+                                normal: {
+
+                                    show: true,
+                                    position: 'center'
+                                },
+                                emphasis: {
+                                    show: true,
+                                    textStyle: {
+                                        fontSize: '30',
+                                    }
+                                }
+                            },
+                            labelLine: {
+                                normal: {
+                                    show: false
+                                }
+                            },
+                            data: [{
+                                    value: jsonData,
+                                    name: ''
+                                },
+                                {
+                                    value: totalNum.totalMonthSignSingleAmount - jsonData,
+                                    name: ''
+                                },
+
+                            ]
+                        },
+                        {
+                            name: '',
+                            type: 'pie',
+                            clockWise: false,
+                            radius: ['50%', '50%'],
+                            hoverAnimation: false,
+
+                            itemStyle: {
+                                normal: {
+                                    labelLine: {
+                                        show: false
+                                    },
+                                }
+                            },
+                            data: data2
+                        },
+
+                    ];
+                    option = {
+                        color: [new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: '#27dbf3'
+                        }, {
+                            offset: 1,
+                            color: '#e00d6c'
+                        }]), "#254999"],
+
+                        title: [{
+                                text: this.formatNumber(jsonData),
+                                textStyle: {
+                                    color: '#4effff',
+                                    fontSize: this.fontSize(.12),
+                                    align: 'center'
+                                },
+                                x: 'center',
+                                y: 'center',
+                            },
+                            {
+                                text: '签约单量',
+                                x: 'center',
+                                y: 'top',
+                                textStyle: {
+                                    color: '#fff',
+                                    fontSize: this.fontSize(.14),
+                                    fontWeight: 'normal'
+                                },
+                            }
+                        ],
+                        tooltip: {
+                            show: false
+                        },
+                        legend: {
+                            show: false
+                        },
+                        toolbox: {
+                            show: false
+                        },
+                        series: seriesObj
+                    }
+                    this.sjEcharts.myChartOne.setOption(option, true);
+                },
+
+                //商务累计2
+                initEchartsByBusinessOne2(jsonData, totalNum) {
+                    this.xwzEcharts.myChartOne = echarts.init(document.getElementById('echarts_business11'));
+                    this.xwzEcharts.myChartOne.clear();
+                    var data2 = [];
+                    for (var i = 0; i < 4; i++) {
+                        data2.push({
+                            value: 80,
+                            itemStyle: {
+                                normal: {
+                                    borderWidth: 1,
+                                    /* shadowBlur: 30,*/
+                                    borderColor: new echarts.graphic.LinearGradient(0, 0, 1, 1, [{
+                                        offset: 0,
+                                        color: '#2AEDFE'
+                                    }, {
+                                        offset: 1,
+                                        color: '#2AEDFE'
+                                    }]),
+                                }
+                            }
+                        }, {
+                            value: 40,
+                        });
+                    }
+                    var seriesObj = [{
+                            type: 'pie',
+                            radius: ['58%', '70%'],
+                            avoidLabelOverlap: false,
+                            hoverAnimation: false,
+                            label: {
+                                normal: {
+
+                                    show: true,
+                                    position: 'center'
+                                },
+                                emphasis: {
+                                    show: true,
+                                    textStyle: {
+                                        fontSize: '30',
+                                    }
+                                }
+                            },
+                            labelLine: {
+                                normal: {
+                                    show: false
+                                }
+                            },
+                            data: [{
+                                    value: jsonData,
+                                    name: ''
+                                },
+                                {
+                                    value: totalNum.totalMonthSignSingleAmount - jsonData,
+                                    name: ''
+                                },
+
+                            ]
+                        },
+                        {
+                            name: '',
+                            type: 'pie',
+                            clockWise: false,
+                            radius: ['50%', '50%'],
+                            hoverAnimation: false,
+
+                            itemStyle: {
+                                normal: {
+                                    labelLine: {
+                                        show: false
+                                    },
+                                }
+                            },
+                            data: data2
+                        },
+
+                    ];
+                    option = {
+                        color: [new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: '#27dbf3'
+                        }, {
+                            offset: 1,
+                            color: '#e00d6c'
+                        }]), "#254999"],
+
+                        title: [{
+                                text: this.formatNumber(jsonData),
+                                textStyle: {
+                                    color: '#4effff',
+                                    fontSize: this.fontSize(.12),
+                                    align: 'center'
+                                },
+                                x: 'center',
+                                y: 'center',
+                            },
+                            {
+                                text: '签约单量',
+                                x: 'center',
+                                y: 'top',
+                                textStyle: {
+                                    color: '#fff',
+                                    fontSize: this.fontSize(.14),
+                                    fontWeight: 'normal'
+                                },
+                            }
+                        ],
+                        tooltip: {
+                            show: false
+                        },
+                        legend: {
+                            show: false
+                        },
+                        toolbox: {
+                            show: false
+                        },
+                        series: seriesObj
+                    }
+                    this.xwzEcharts.myChartOne.setOption(option, true);
+                },
+                //商务累计2
+                initEchartsByBusinessTwo(jsonData, totalNum) {
+                    this.sjEcharts.myChartTwo = echarts.init(document.getElementById('echarts_business2'));
+                    this.sjEcharts.myChartTwo.clear();
+                    var data2 = [];
+                    for (var i = 0; i < 4; i++) {
+                        data2.push({
+                            value: 80,
+                            itemStyle: {
+                                normal: {
+                                    borderWidth: 1,
+                                    /* shadowBlur: 30,*/
+                                    borderColor: new echarts.graphic.LinearGradient(0, 0, 1, 1, [{
+                                        offset: 0,
+                                        color: '#2AEDFE'
+                                    }, {
+                                        offset: 1,
+                                        color: '#2AEDFE'
+                                    }]),
+                                }
+                            }
+                        }, {
+                            value: 40,
+                        });
+                    }
+                    var seriesObj = [{
+                            type: 'pie',
+                            radius: ['58%', '70%'],
+                            avoidLabelOverlap: false,
+                            hoverAnimation: false,
+                            label: {
+                                normal: {
+
+                                    show: true,
+                                    position: 'center'
+                                },
+                                emphasis: {
+                                    show: true,
+                                    textStyle: {
+                                        fontSize: '30',
+                                    }
+                                }
+                            },
+                            labelLine: {
+                                normal: {
+                                    show: false
+                                }
+                            },
+                            data: [{
+                                    value: jsonData,
+                                    name: ''
+                                },
+                                {
+                                    value: totalNum.totalMonthSignPrice - jsonData,
+                                    name: ''
+                                },
+
+                            ]
+                        },
+                        {
+                            name: '',
+                            type: 'pie',
+                            clockWise: false,
+                            radius: ['50%', '50%'],
+                            itemStyle: {
+                                normal: {
+                                    labelLine: {
+                                        show: false
+                                    },
+                                }
+                            },
+                            data: data2
+                        },
+
+                    ];
+                    option = {
+                        color: [new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: '#0066ff'
+                        }, {
+                            offset: 1,
+                            color: '#e80567 '
+                        }]), "#254999"],
+
+                        title: [{
+                                text: this.formatNumber(jsonData),
+                                textStyle: {
+                                    color: '#4effff',
+                                    fontSize: this.fontSize(.12),
+                                    align: 'center'
+                                },
+                                x: 'center',
+                                y: 'center',
+                            },
+                            {
+                                text: ['{a|签约金额}', '{b|(元)}'].join(''),
+                                x: 'center',
+                                y: 'top',
+                                textStyle: {
+                                    color: '#fff',
+                                    fontSize: this.fontSize(.14),
+                                    rich: {
+                                        a: {
+                                            color: '#ffffff',
+                                            fontSize: this.fontSize(.14),
+                                        },
+                                        b: {
+                                            color: '#fff',
+                                            fontSize: this.fontSize(.10),
+                                            padding: [0, 0, 0, 4]
+                                        }
+                                    }
+
+                                }
+                            },
+                            // {
+                            //     text: '(元)',
+                            //     x: 'right',
+                            //     y: 'top',
+                            //     textStyle: {
+                            //         color: '#fff',
+                            //         fontSize: this.fontSize(.12)
+                            //     }
+                            // }
+                        ],
+                        tooltip: {
+                            show: false
+                        },
+                        legend: {
+                            show: false
+                        },
+                        toolbox: {
+                            show: false
+                        },
+                        series: seriesObj
+                    }
+                    // myChart.setOption()
+                    this.sjEcharts.myChartTwo.setOption(option);
+                },
+                //商务累计22
+                initEchartsByBusinessTwo2(jsonData, totalNum) {
+                    this.xwzEcharts.myChartTwo = echarts.init(document.getElementById('echarts_business22'));
+                    this.xwzEcharts.myChartTwo.clear();
+                    var data2 = [];
+                    for (var i = 0; i < 4; i++) {
+                        data2.push({
+                            value: 80,
+                            itemStyle: {
+                                normal: {
+                                    borderWidth: 1,
+                                    /* shadowBlur: 30,*/
+                                    borderColor: new echarts.graphic.LinearGradient(0, 0, 1, 1, [{
+                                        offset: 0,
+                                        color: '#2AEDFE'
+                                    }, {
+                                        offset: 1,
+                                        color: '#2AEDFE'
+                                    }]),
+                                }
+                            }
+                        }, {
+                            value: 40,
+                        });
+                    }
+                    var seriesObj = [{
+                            type: 'pie',
+                            radius: ['58%', '70%'],
+                            avoidLabelOverlap: false,
+                            hoverAnimation: false,
+                            label: {
+                                normal: {
+
+                                    show: true,
+                                    position: 'center'
+                                },
+                                emphasis: {
+                                    show: true,
+                                    textStyle: {
+                                        fontSize: '30',
+                                    }
+                                }
+                            },
+                            labelLine: {
+                                normal: {
+                                    show: false
+                                }
+                            },
+                            data: [{
+                                    value: jsonData,
+                                    name: ''
+                                },
+                                {
+                                    value: totalNum.totalMonthSignPrice - jsonData,
+                                    name: ''
+                                },
+
+                            ]
+                        },
+                        {
+                            name: '',
+                            type: 'pie',
+                            clockWise: false,
+                            radius: ['50%', '50%'],
+                            itemStyle: {
+                                normal: {
+                                    labelLine: {
+                                        show: false
+                                    },
+                                }
+                            },
+                            data: data2
+                        },
+
+                    ];
+                    option = {
+                        color: [new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: '#0066ff'
+                        }, {
+                            offset: 1,
+                            color: '#e80567 '
+                        }]), "#254999"],
+
+                        title: [{
+                                text: this.formatNumber(jsonData),
+                                textStyle: {
+                                    color: '#4effff',
+                                    fontSize: this.fontSize(.12),
+                                    align: 'center'
+                                },
+                                x: 'center',
+                                y: 'center',
+                            },
+                            {
+                                text: ['{a|签约金额}', '{b|(元)}'].join(''),
+                                x: 'center',
+                                y: 'top',
+                                textStyle: {
+                                    color: '#fff',
+                                    fontSize: this.fontSize(.14),
+                                    rich: {
+                                        a: {
+                                            color: '#ffffff',
+                                            fontSize: this.fontSize(.14),
+                                        },
+                                        b: {
+                                            color: '#fff',
+                                            fontSize: this.fontSize(.10),
+                                            padding: [0, 0, 0, 4]
+                                        }
+                                    }
+
+                                }
+                            },
+                        ],
+                        tooltip: {
+                            show: false
+                        },
+                        legend: {
+                            show: false
+                        },
+                        toolbox: {
+                            show: false
+                        },
+                        series: seriesObj
+                    }
+                    // myChart.setOption()
+                    this.xwzEcharts.myChartTwo.setOption(option);
+                },
+                // 漏斗
+                initFunnel(parameter1, parameter2, parameter3, parameter4) {
+                    var _this = this;
+                    this.sjEcharts.funnelCharts = echarts.init(document.getElementById('funnel-charts'));
+                    this.sjEcharts.funnelCharts.clear();
+                    var funnelData = [{
+                            "value": parameter1,
+                            "name": '资源量'
+                        },
+                        {
+                            "value": parameter2,
+                            "name": '邀约量'
+                        },
+                        {
+                            "value": parameter3,
+                            "name": '来访量'
+                        },
+                        {
+                            "value": parameter4,
+                            "name": '签约量'
+                        }
+                    ];
+                    var funnelOption = {
+                        color: [new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                            offset: 0,
+                            color: '#3ea5f6'
+                        }, {
+                            offset: 1,
+                            color: '#1460ec'
+                        }]), new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                            offset: 0,
+                            color: '#29bfc0'
+                        }, {
+                            offset: 1,
+                            color: '#02a9ca'
+                        }]), new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                            offset: 0,
+                            color: '#f48266'
+                        }, {
+                            offset: 1,
+                            color: '#e36250'
+                        }]), new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                            offset: 0,
+                            color: '#e041ae'
+                        }, {
+                            offset: 1,
+                            color: '#e72a9f'
+                        }])],
+                        legend: {
+                            orient: 'vertical',
+                            icon: "circle",
+                            top: "center",
+                            right: '14%',
+                            textStyle: {
+                                color: '#27DBF3',
+                                fontSize: this.fontSize(0.14),
+                            },
+                            itemWidth: 8, // 圆圈的宽
+                            formatter: function (name) {
+                                return "{title|" + name + "}     {value|" + (_this.arrayObj(funnelData,
+                                    "name")[name].value) + "}"
+                            },
+                            data: funnelData
+                        },
+                        textStyle: {
+                            rich: {
+                                title: {
+                                    fontSize: this.fontSize(0.14),
+                                    color: "rgb(255, 255, 255)"
+                                },
+                                value: {
+                                    fontSize: this.fontSize(0.16),
+                                    color: "#27DBF3"
+                                }
+                            }
+                        },
+                        // calculable: true,
+                        series: [{
+                            // name:'鼠标移入提示',
+                            type: 'funnel',
+                            left: '10%',
+                            top: "12%",
+                            width: '45%',
+                            height: '75%',
+                            sort: 'descending',
+                            gap: 6, // 间隙
+                            label: {
+                                normal: { // 内部显示
+                                    position: 'inside',
+                                    formatter: '{d}%',
+                                    textStyle: {
+                                        color: '#fff'
+                                    }
+                                },
+                            },
+                            itemStyle: {
+                                normal: {
+                                    borderWidth: 0
+                                }
+                            },
+                            data: funnelData
+                        }]
+                    };
+                    this.sjEcharts.funnelCharts.setOption(funnelOption);
+                },
+                initFunnel2(parameter1, parameter2, parameter3, parameter4) {
+                    this.xwzEcharts.funnelCharts = echarts.init(document.getElementById('funnel-charts2'));
+                    var _this = this;
+                    this.xwzEcharts.funnelCharts.clear();
+                    var funnelData = [{
+                            "value": parameter1,
+                            "name": '资源量'
+                        },
+                        {
+                            "value": parameter2,
+                            "name": '邀约量'
+                        },
+                        {
+                            "value": parameter3,
+                            "name": '来访量'
+                        },
+                        {
+                            "value": parameter4,
+                            "name": '签约量'
+                        }
+                    ];
+                    var funnelOption = {
+                        color: [new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                            offset: 0,
+                            color: '#3ea5f6'
+                        }, {
+                            offset: 1,
+                            color: '#1460ec'
+                        }]), new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                            offset: 0,
+                            color: '#29bfc0'
+                        }, {
+                            offset: 1,
+                            color: '#02a9ca'
+                        }]), new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                            offset: 0,
+                            color: '#f48266'
+                        }, {
+                            offset: 1,
+                            color: '#e36250'
+                        }]), new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                            offset: 0,
+                            color: '#e041ae'
+                        }, {
+                            offset: 1,
+                            color: '#e72a9f'
+                        }])],
+                        legend: {
+                            orient: 'vertical',
+                            icon: "circle",
+                            top: "center",
+                            right: '14%',
+                            textStyle: {
+                                color: '#27DBF3',
+                                fontSize: this.fontSize(0.14),
+                            },
+                            itemWidth: 8, // 圆圈的宽
+                            formatter: function (name) {
+                                return "{title|" + name + "}     {value|" + (_this.arrayObj(funnelData,
+                                    "name")[name].value) + "}"
+                            },
+                            data: funnelData
+                        },
+                        textStyle: {
+                            rich: {
+                                title: {
+                                    fontSize: this.fontSize(0.14),
+                                    color: "rgb(255, 255, 255)"
+                                },
+                                value: {
+                                    fontSize: this.fontSize(0.16),
+                                    color: "#27DBF3"
+                                }
+                            }
+                        },
+                        // calculable: true,
+                        series: [{
+                            // name:'鼠标移入提示',
+                            type: 'funnel',
+                            left: '10%',
+                            top: "12%",
+                            width: '45%',
+                            height: '75%',
+                            sort: 'descending',
+                            gap: 6, // 间隙
+                            label: {
+                                normal: { // 内部显示
+                                    position: 'inside',
+                                    formatter: '{d}%',
+                                    textStyle: {
+                                        color: '#fff'
+                                    }
+                                },
+                            },
+                            itemStyle: {
+                                normal: {
+                                    borderWidth: 0
+                                }
+                            },
+                            data: funnelData
+                        }]
+                    };
+                    this.xwzEcharts.funnelCharts.setOption(funnelOption);
+                },
+                // 地图
+                initMap(parameter, type) {
+                    var planePath =
+                        'path://M.6,1318.313v-89.254l-319.9-221.799l0.073-208.063c0.521-84.662-26.629-121.796-63.961-121.491c-37.332-0.305-64.482,36.829-63.961,121.491l0.073,208.063l-319.9,221.799v89.254l330.343-157.288l12.238,241.308l-134.449,92.931l0.531,42.034l175.125-42.917l175.125,42.917l0.531-42.034l-134.449-92.931l12.238-241.308L1705';
+                    var convertData = function (data) {
+                        if (!data) {
+                            return false;
+                        }
+                        var res = [];
+                        for (var i = 0; i < data.length; i++) {
+                            var dataItem = data[i];
+                            var fromCoord = '';
+                            var toCoord = '';
+                            if (type) {
+                                fromCoord = geoCoordMap[dataItem[0].name];
+                                toCoord = geoCoordMap[dataItem[1].name];
+                            } else {
+                                fromCoord = geoCoordMap[dataItem[1].name];
+                                toCoord = geoCoordMap[dataItem[0].name];
+                            }
+                            if (fromCoord && toCoord) {
+                                res.push([{
+                                    coord: fromCoord
+                                }, {
+                                    coord: toCoord
+                                }]);
+                            }
+                        }
+                        return res;
+                    };
+                    var color = "#27dbf2";
+                    if (type) {
+                        color = "#fae07f";
+                    }
+                    var series = [];
+                    if(parameter.length){
+                        parameter.forEach(function (item, i) {
+                            series.push({
+                                name: item[0],
+                                type: 'lines',
+                                zlevel: 1,
+                                effect: {
+                                    show: true,
+                                    period: 4,
+                                    trailLength: 0.7,
+                                    color: '#fff',
+                                    symbolSize: 3
+                                },
+                                lineStyle: {
+                                    normal: {
+                                        color: color,
+                                        width: 0,
+                                        curveness: 0.4
+                                    }
+                                },
+                                data: convertData(item[1])
+                            }, { // 固定线条
+                                name: item[0],
+                                type: 'lines',
+                                zlevel: 2,
+                                effect: {
+                                    show: true,
+                                    period: 4,
+                                    trailLength: 0,
+                                    symbol: planePath,
+                                    symbolSize: 15
+                                },
+                                lineStyle: {
+                                    normal: {
+                                        color: color,
+                                        width: 1,
+                                        // opacity: 0.4,
+                                        curveness: 0.4
+                                    }
+                                },
+                                data: convertData(item[1])
+                            }, {
+                                name: item[0],
+                                type: 'effectScatter',
+                                coordinateSystem: 'geo',
+                                zlevel: 2,
+                                rippleEffect: {
+                                    brushType: 'stroke'
+                                },
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        textStyle: {
+                                            fontSize: mainVM.fontSize(0.14),
+                                        },
+                                        position: 'right',
+                                        // formatter: '{b}'
+                                        formatter: function (params) { // 圆环显示文字
+                                            for (var i = 0; i < item[1].length; i++) {
+                                                if (item[1][i][0].name == params.data.name) {
+                                                    return params.data.name + " " + item[1][i][0].num;
+                                                }
+                                            }
+                                            // return params.data.name + " " + params.data.value[
+                                            //     params.data.value.length - 1];
+                                        },
+                                    },
+                                },
+                                symbolSize: function (val) {
+                                    // return val[2] / 8;
+                                    return 10;
+                                },
+                                itemStyle: {
+                                    normal: {
+                                        color: color
+                                    }
+                                },
+                                data: item[1].map(function (dataItem) {
+                                    return {
+                                        name: dataItem[1].name,
+                                        value: geoCoordMap[dataItem[1].name].concat([
+                                            dataItem[1].value
+                                        ])
+                                    };
+                                })
+                            });
+                        });
+                    }
+                    var mapOption = {
+                        backgroundColor: 'rgba(255 , 255, 255, 0)',
+                        geo: {
+                            map: 'china',
+                            label: {
+                                emphasis: {
+                                    show: false
+                                }
+                            },
+                            roam: false, // 是否开启鼠标缩放和平移漫游
+                            itemStyle: {
+                                normal: {
+                                    // shadowColor: 'rgba(51, 139, 206, 1)',
+                                    // shadowBlur: 8,
+                                    // shadowOffsetX: -5,
+                                    // shadowOffsetY: 8,
+                                    // borderColor: '#338bce',
+                                    // areaColor: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                    //     offset: 0,
+                                    //     color: 'rgba(32, 51, 113, 1)'
+                                    // }, {
+                                    //     offset: 1,
+                                    //     color: 'rgba(51, 80, 176, 0.8)'
+                                    // }])
+                                    shadowColor: 'rgba(51, 139, 206, 0.8)',
+                                    shadowBlur: 10,
+                                    borderColor: '#338bce',
+                                    // areaColor: '#203270',
+                                    areaColor: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                        offset: 0,
+                                        color: 'rgba(32, 51, 113, 1)'
+                                    }, {
+                                        offset: 1,
+                                        color: 'rgba(51, 80, 176, 0.8)'
+                                    }])
+                                },
+                                emphasis: {
+                                    areaColor: '#152350'
+                                }
+                            }
+                        },
+                        series: series
+                    };
+                    this.mapCharts.setOption(mapOption);
+                },
+                initMap2(parameter2, type) {
+                    var planePath =
+                        'path://M.6,1318.313v-89.254l-319.9-221.799l0.073-208.063c0.521-84.662-26.629-121.796-63.961-121.491c-37.332-0.305-64.482,36.829-63.961,121.491l0.073,208.063l-319.9,221.799v89.254l330.343-157.288l12.238,241.308l-134.449,92.931l0.531,42.034l175.125-42.917l175.125,42.917l0.531-42.034l-134.449-92.931l12.238-241.308L1705';
+                    var convertData = function (data) {
+                        if (!data) {
+                            return false;
+                        }
+                        var res = [];
+                        for (var i = 0; i < data.length; i++) {
+                            var dataItem = data[i];
+                            var fromCoord = '';
+                            var toCoord = '';
+                            if (type) {
+                                fromCoord = geoCoordMap[dataItem[0].name];
+                                toCoord = geoCoordMap[dataItem[1].name];
+                            } else {
+                                fromCoord = geoCoordMap[dataItem[1].name];
+                                toCoord = geoCoordMap[dataItem[0].name];
+                            }
+                            if (fromCoord && toCoord) {
+                                res.push([{
+                                    coord: fromCoord
+                                }, {
+                                    coord: toCoord
+                                }]);
+                            }
+                        }
+                        return res;
+                    };
+                    var color = "#27dbf2";
+                    if (type) {
+                        color = "#fae07f";
+                    }
+                    var series = [];
+                    if(parameter2.length){
+                        parameter2.forEach(function (item, i) {
+                            series.push({
+                                name: item[0],
+                                type: 'lines',
+                                zlevel: 1,
+                                effect: {
+                                    show: true,
+                                    period: 4,
+                                    trailLength: 0.7,
+                                    color: '#fff',
+                                    symbolSize: 3
+                                },
+                                lineStyle: {
+                                    normal: {
+                                        color: color,
+                                        width: 0,
+                                        curveness: 0.4
+                                    }
+                                },
+                                data: convertData(item[1])
+                            }, { // 固定线条
+                                name: item[0],
+                                type: 'lines',
+                                zlevel: 2,
+                                effect: {
+                                    show: true,
+                                    period: 4,
+                                    trailLength: 0,
+                                    symbol: planePath,
+                                    symbolSize: 15
+                                },
+                                lineStyle: {
+                                    normal: {
+                                        color: color,
+                                        width: 1,
+                                        // opacity: 0.4,
+                                        curveness: 0.4
+                                    }
+                                },
+                                data: convertData(item[1])
+                            }, {
+                                name: item[0],
+                                type: 'effectScatter',
+                                coordinateSystem: 'geo',
+                                zlevel: 2,
+                                rippleEffect: {
+                                    brushType: 'stroke'
+                                },
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        textStyle: {
+                                            fontSize: mainVM.fontSize(0.14),
+                                        },
+                                        position: 'right',
+                                        // formatter: '{b}'
+                                        formatter: function (params) { // 圆环显示文字
+                                            for (var i = 0; i < item[1].length; i++) {
+                                                if (item[1][i][0].name == params.data.name) {
+                                                    return params.data.name + " " + item[1][i][0].num;
+                                                }
+                                            }
+                                        },
+                                    },
+                                },
+                                symbolSize: function (val) {
+                                    // return val[2] / 8;
+                                    return 10;
+                                },
+                                itemStyle: {
+                                    normal: {
+                                        color: color
+                                    }
+                                },
+                                data: item[1].map(function (dataItem) {
+                                    return {
+                                        name: dataItem[1].name,
+                                        value: geoCoordMap[dataItem[1].name].concat([
+                                            dataItem[1].value
+                                        ])
+                                    };
+                                })
+                            });
+                        });
+                    }
+                    var mapOption = {
+                        backgroundColor: 'rgba(255 , 255, 255, 0)',
+                        title: {
+                            // text: '模拟迁徙',
+                            left: 'left',
+                            textStyle: {
+                                color: '#fff'
+                            }
+                        },
+                        // tooltip: {
+                        //     trigger: 'item'
+                        // },
+                        geo: {
+                            map: 'china',
+                            label: {
+                                emphasis: {
+                                    show: false
+                                }
+                            },
+                            roam: false, // 是否开启鼠标缩放和平移漫游
+                            itemStyle: {
+                                normal: {
+                                    shadowColor: 'rgba(51, 139, 206, 0.8)',
+                                    shadowBlur: 10,
+                                    borderColor: '#338bce',
+                                    // areaColor: '#203270',
+                                    areaColor: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                        offset: 0,
+                                        color: 'rgba(32, 51, 113, 1)'
+                                    }, {
+                                        offset: 1,
+                                        color: 'rgba(51, 80, 176, 0.8)'
+                                    }])
+                                },
+                                emphasis: {
+                                    areaColor: '#152350'
+                                }
+                            }
+                        },
+                        series: series
+                    };
+                    this.mapCharts2.setOption(mapOption);
+                },
+                initBar(serviceonLine, converastion, accountConsumer, clewconverSation) {
+                    this.sjEcharts.barCharts = echarts.init(document.getElementById('bar-charts'));
+                    this.sjEcharts.barCharts.clear();
+                    var data = [{
+                            "name": "客服在线数",
+                            "value": serviceonLine
+                        },
+                        {
+                            "name": "会话总量",
+                            "value": converastion
+                        },
+                        {
+                            "name": "账户消费",
+                            "value": accountConsumer
+                        },
+                        {
+                            "name": "线索会话",
+                            "value": clewconverSation
+                        },
+                    ];
+                    var itemName = [];
+                    data.forEach(function (item) {
+                        itemName.push(item.name);
+                    });
+                    var barOption = {
+                        backgroundColor: 'rgba(255 , 255, 255, 0)',
+                        xAxis: {
+                            type: 'category',
+                            axisTick: {
+                                show: false
+                            },
+                            axisLine: {
+                                show: false
+                            },
+                            axisLabel: {
+                                show: true,
+                                textStyle: {
+                                    fontSize: this.fontSize(.14),
+                                    color: '#fff',
+                                },
+                                margin: 20, // 刻度标签与轴线之间的距离。
+                            },
+                            label: {
+                                show: true,
+                                position: 'bottom',
+                                color: "#fff",
+                                formatter: '{b}'
+                            },
+                            data: itemName,
+                        },
+                        yAxis: {
+                            splitLine: {
+                                show: false
+                            },
+                            axisTick: {
+                                show: false
+                            },
+                            axisLine: {
+                                show: false
+                            },
+                            axisLabel: {
+                                show: false
+                            }
+                        },
+                        series: [{
+                                // name: '上面圆',
+                                type: 'pictorialBar',
+                                symbolSize: [30, 15],
+                                symbolOffset: [0, -8],
+                                z: 5,
+                                itemStyle: {
+                                    normal: {
+                                        color: '#27dbf3'
+                                    }
+                                },
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        position: 'top',
+                                        color: '#fff'
+                                    }
+                                },
+                                symbolPosition: 'end',
+                                data: data
+                            },
+                            {
+                                // name: '下面圆',
+                                type: 'pictorialBar',
+                                symbolSize: [30, 15],
+                                symbolOffset: [0, 8],
+                                z: 1,
+                                itemStyle: {
+                                    normal: {
+                                        color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                                            offset: 0,
+                                            color: 'rgba(25,93,223,1)' // 0% 处的颜色
+                                        }, {
+                                            offset: 1,
+                                            color: 'rgba(36,191,238,1)' // 100% 处的颜色
+                                        }], false),
+                                    }
+                                },
+                                data: data
+                            },
+                            {
+                                type: 'bar',
+                                itemStyle: {
+                                    normal: {
+                                        color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                                            offset: 0,
+                                            color: 'rgba(25,93,223,1)' // 0% 处的颜色
+                                        }, {
+                                            offset: 1,
+                                            color: 'rgba(36,191,238,1)' // 100% 处的颜色
+                                        }], false),
+                                    }
+                                },
+                                silent: true,
+                                barWidth: 30,
+                                barGap: '-100%', // Make series be overlap
+                                data: data
+                            }
+                        ]
+                    };
+                    this.sjEcharts.barCharts.setOption(barOption);
+                },
+                initBar2(serviceonLine, converastion, accountConsumer, clewconverSation) {
+                    this.xwzEcharts.barCharts = echarts.init(document.getElementById('bar-charts2'));
+                    this.xwzEcharts.barCharts.clear();
+                    var data = [{
+                            "name": "客服在线数",
+                            "value": serviceonLine
+                        },
+                        {
+                            "name": "会话总量",
+                            "value": converastion
+                        },
+                        {
+                            "name": "账户消费",
+                            "value": accountConsumer
+                        },
+                        {
+                            "name": "线索会话",
+                            "value": clewconverSation
+                        },
+                    ];
+                    var itemName = [];
+                    data.forEach(function (item) {
+                        itemName.push(item.name);
+                    });
+                    var barOption = {
+                        backgroundColor: 'rgba(255 , 255, 255, 0)',
+                        xAxis: {
+                            type: 'category',
+                            axisTick: {
+                                show: false
+                            },
+                            axisLine: {
+                                show: false
+                            },
+                            axisLabel: {
+                                show: true,
+                                textStyle: {
+                                    fontSize: this.fontSize(.14),
+                                    color: '#fff',
+                                },
+                                margin: 20, // 刻度标签与轴线之间的距离。
+                            },
+                            label: {
+                                show: true,
+                                position: 'bottom',
+                                color: "#fff",
+                                formatter: '{b}'
+                            },
+                            data: itemName,
+                        },
+                        yAxis: {
+                            splitLine: {
+                                show: false
+                            },
+                            axisTick: {
+                                show: false
+                            },
+                            axisLine: {
+                                show: false
+                            },
+                            axisLabel: {
+                                show: false
+                            }
+                        },
+                        series: [{
+                                // name: '上面圆',
+                                type: 'pictorialBar',
+                                symbolSize: [30, 15],
+                                symbolOffset: [0, -8],
+                                z: 5,
+                                itemStyle: {
+                                    normal: {
+                                        color: '#27dbf3'
+                                    }
+                                },
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        position: 'top',
+                                        color: '#fff'
+                                    }
+                                },
+                                symbolPosition: 'end',
+                                data: data
+                            },
+                            {
+                                // name: '下面圆',
+                                type: 'pictorialBar',
+                                symbolSize: [30, 15],
+                                symbolOffset: [0, 8],
+                                z: 1,
+                                itemStyle: {
+                                    normal: {
+                                        color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                                            offset: 0,
+                                            color: 'rgba(25,93,223,1)' // 0% 处的颜色
+                                        }, {
+                                            offset: 1,
+                                            color: 'rgba(36,191,238,1)' // 100% 处的颜色
+                                        }], false),
+                                    }
+                                },
+                                data: data
+                            },
+                            {
+                                type: 'bar',
+                                itemStyle: {
+                                    normal: {
+                                        color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                                            offset: 0,
+                                            color: 'rgba(25,93,223,1)' // 0% 处的颜色
+                                        }, {
+                                            offset: 1,
+                                            color: 'rgba(36,191,238,1)' // 100% 处的颜色
+                                        }], false),
+                                    }
+                                },
+                                silent: true,
+                                barWidth: 30,
+                                barGap: '-100%', // Make series be overlap
+                                data: data
+                            }
+                        ]
+                    };
+                    this.xwzEcharts.barCharts.setOption(barOption);
+                },
+                //参数container为图表盒子节点.charts为图表节点
+                chartssize(charts, container) {
+                    if (!container) {
+                        container = charts.parent(".box");
+                    }
+                    var wi = container.width();
+                    var hi = container.height();
+                    charts.width(wi)
+                    charts.height(hi)
+                },
+                chartssize2() {
+                    var oele = $(".charts");
+                    for (var i = 0;i<oele.length;i++) {
+                        var container = $(oele[i]).parent(".box");
+                        var wi = container.width();
+                        var hi = container.height();
+                        $(oele[i]).width(wi)
+                        $(oele[i]).height(hi)
+                    };
+                    // if (!container) {
+                    //     container = charts.parent(".box");
+                    // }
+                    // var wi = container.width();
+                    // var hi = container.height();
+                    // charts.width(wi)
+                    // charts.height(hi)
+                },
+                initSwiper() {
+                    this.mySwiper = new Swiper('.swiper-container', {
+                        pagination: '.swiper-pagination',
+                        observer: true,
+                        observeParents: true,
+                        effect: 'cube',
+                        // cubeEffect: {
+                        //     slideShadows: false,
+                        //     shadow: false,
+                        //     shadowOffset: 100,
+                        //     shadowScale: 0.6
+                        // },
+                        speed: 1000,
+                        // loop: false,
+                        // autoplay: 10000,
+                        onSlideChangeStart: function () {
+                            var index = mainVM.mySwiper.activeIndex;
+                            $('.nav-tab li').removeClass('active').eq(index).addClass('active');
+                        }
+                    });
+                },
+                groupArr(arr) {
+                    var newArr = [];
+                    if (arr != null && arr.length > 0) {
+                        for (var i = 0; i < arr.length; i++) {
+                            var exist = false;
+                            var tempIndex = -1;
+                            for (var j = 0; j < newArr.length; j++) {
+                                if (arr[i].startoff === newArr[j][0]) {
+                                    exist = true;
+                                    tempIndex = j;
+                                }
+                            }
+                            if (exist) { // 是否存在同一出发点
+                                var tempArr = newArr[tempIndex];
+                                var obj = [{
+                                    name: arr[i].startoff
+                                }, {
+                                    name: arr[i].city,
+                                    value: 50,
+                                    num: arr[i].num,
+                                }];
+                                tempArr[1].push(obj);
+                            } else {
+                                var obj = [arr[i].startoff, [
+                                    [{
+                                        name: arr[i].startoff
+                                    }, {
+                                        name: arr[i].city,
+                                        value: 50,
+                                        num: arr[i].num,
+                                    }]
+                                ]];
+                                newArr.push(obj);
+                            }
+                        }
+                        return newArr;
+                    }
+                    return null;
+                },
+                groupArr2(data){
+                    var result = [];
+                    for(var i=0;i<data.length;i++){
+                        var arr = [];
+                        arr.push(data[i].name);
+                        arr.push(data[i].list);
+                        result.push(arr);
+                    }
+                    return result;
+                },
+                randomInt( min,max ){
+                    if( min>max ){
+                    var t=min;
+                    min=max;
+                    max=t;	}
+                    return Math.floor(   Math.random()*( max-min+1 )+min  )*1000  },
+                getJson() {
+                    var _this = this;
+                    // axios({
+                    //     method: 'get',
+                    //     url: "http://192.168.8.142:8088/operation/info"
+                    // }).then(function (res) {
+                        // var res = JSON.parse(res.data.msg).DataList;
+                        console.log('res', res);
+                        for (var i = 0; i < res.length; i++) {
+                            var json = res[i];
+                            if (json.fromchan == 2) {
+                                // _this.count4.update(json.daytotalsignamount);
+                                // _this.count5.update(json.daytotalsignsingleamount);
+                                // _this.count6.update(json.daytotalsignprice);
+                                _this.xiaowuzhong = json;
+                                // 地图 start
+                                _this.mapCharts2 = echarts.init(document.getElementById('map-charts2'));
+                                clearInterval(_this.mapTimer2);
+                                _this.xwzEcharts.signData = _this.groupArr2(_this.xiaowuzhong
+                                    .mapsignamount);
+                                _this.xwzEcharts.visitData = _this.groupArr2(_this.xiaowuzhong
+                                    .mapcomevisitamount);
+
+                                _this.mapTimer2 = setInterval(() => {
+                                    _this.num2 = _this.num2 ? --_this.num2 : ++_this.num2;
+                                    _this.initMap2(_this.arr2[_this.num2], _this.num2);
+                                }, 8000)
+                                _this.arr2 = [_this.xwzEcharts.signData, _this.xwzEcharts.visitData];
+                                _this.initMap2(_this.arr2[_this.num2], _this.num2);
+                                // 地图 end
+
+                                _this.initEchartsByBusinessOne2(json.monthsignsingleamount, _this
+                                    .xwzTotalData)
+                                _this.initEchartsByBusinessTwo2(json.monthsignprice, _this.xwzTotalData)
+                                _this.initEchartsByTmk2(json.dayresourceamount, json
+                                    .dayinvitationamount, json.daycallamount, _this.xwzTotalData)
+                                _this.initEchartsByStatistics2(json.daysignamount, json.daycomeamount,
+                                    json.daysignsingleamount, json.daysignprice, _this.xwzTotalData)
+                                _this.initFunnel2(json.monthresourceamount, json.monthinvitationamount,
+                                    json.monthcomeamount, json.monthsignamount);
+                                _this.initBar2(json.dayserviceonlinenum, json.dayconverastionamount,
+                                    json.dayaccountconsumer, json.dayclewconversation);
+
+                            } else if (json.fromchan == 1) {
+                                // console.log(Number(json.daytotalsignamount))
+                                // _this.count1.update(json.daytotalsignamount);
+                                // _this.count2.update(json.daytotalsignsingleamount);
+                                // _this.count3.update(json.daytotalsignprice);
+                                _this.shangjihezi = json;
+                                // 地图 start
+                                _this.mapCharts = echarts.init(document.getElementById('map-charts'));
+                                clearInterval(_this.mapTimer);
+                                _this.sjEcharts.signData = _this.groupArr2(_this.shangjihezi.mapsignamount);
+                                _this.sjEcharts.visitData = _this.groupArr2(_this.shangjihezi.mapcomevisitamount);
+                                _this.mapTimer = setInterval(() => {
+                                    _this.num = _this.num ? --_this.num : ++_this.num;
+                                    _this.initMap(_this.arr[_this.num], _this.num);
+                                }, 8000)
+
+                                _this.arr = [_this.sjEcharts.signData, _this.sjEcharts.visitData];
+                                _this.initMap(_this.arr[_this.num], _this.num);
+                                // 地图 end
+
+                                _this.initEchartsByBusinessOne(json.monthsignsingleamount, _this
+                                    .sjTotalData)
+                                _this.initEchartsByBusinessTwo(json.monthsignprice, _this.sjTotalData)
+                                _this.initEchartsByTmk(json.dayresourceamount, json.dayinvitationamount,
+                                    json.daycallamount, _this.sjTotalData)
+                                _this.initEchartsByStatistics(json.daysignamount, json.daycomeamount,
+                                    json.daysignsingleamount, json.daysignprice, _this.sjTotalData)
+                                _this.initFunnel(json.monthresourceamount, json.monthinvitationamount,
+                                    json.monthcomeamount, json.monthsignamount);
+                                _this.initBar(json.dayserviceonlinenum, json.dayconverastionamount, json
+                                    .dayaccountconsumer, json.dayclewconversation);
+
+                            }
+                        }
+                    // }).catch(function (error) {
+                    //     console.log(error)
+                    // })
+                },
+                getJson2() {
+                    var _this = this;
+                    axios({
+                        method: 'get',
+                        url: "http://192.168.8.142:8088/operation/info"
+                    }).then(function (res) {
+                        var res = JSON.parse(res.data.msg).DataList;
+                        console.log('res', res);
+                        for (let i = 0; i < res.length; i++) {
+                            var json = res[i];
+                            if (json.fromchan == 2) {
+                                _this.xiaowuzhong = json;
+                                _this.count4.update(_this.xiaowuzhong.daytotalsignamount);
+                                _this.count5.update(_this.xiaowuzhong.daytotalsignsingleamount);
+                                _this.count6.update(_this.xiaowuzhong.daytotalsignprice);
+                                // 地图 start
+                                _this.mapCharts2 = echarts.init(document.getElementById('map-charts2'));
+                                clearInterval(_this.mapTimer2);
+                                _this.xwzEcharts.signData = _this.groupArr2(_this.xiaowuzhong
+                                    .mapsignamount);
+                                _this.xwzEcharts.visitData = _this.groupArr2(_this.xiaowuzhong
+                                    .mapcomevisitamount);
+
+                                _this.mapTimer2 = setInterval(() => {
+                                    _this.num2 = _this.num2 ? --_this.num2 : ++_this.num2;
+                                    _this.initMap2(_this.arr2[_this.num2], _this.num2);
+                                }, 8000)
+                                _this.arr2 = [_this.xwzEcharts.signData, _this.xwzEcharts.visitData];
+                                _this.initMap2(_this.arr2[_this.num2], _this.num2);
+                                // 地图 end
+                            setTimeout(()=>{
+                                _this.initEchartsByBusinessOne2(_this.xiaowuzhong.monthsignsingleamount, _this.xwzTotalData)
+                                _this.initEchartsByBusinessTwo2(_this.xiaowuzhong.monthsignprice, _this.xwzTotalData)
+                            }, _this.randomInt(2, 5))
+                            setTimeout(()=>{
+                                _this.initEchartsByTmk2(_this.xiaowuzhong.dayresourceamount, _this.xiaowuzhong
+                                    .dayinvitationamount, _this.xiaowuzhong.daycallamount, _this.xwzTotalData)
+                            }, _this.randomInt(2, 5))
+                            setTimeout(()=>{
+                                _this.initEchartsByStatistics2(_this.xiaowuzhong.daysignamount, _this.xiaowuzhong.daycomeamount,
+                                _this.xiaowuzhong.daysignsingleamount, _this.xiaowuzhong.daysignprice, _this.xwzTotalData)
+                            }, _this.randomInt(2, 5))
+                            setTimeout(()=>{
+                                _this.initFunnel2(_this.xiaowuzhong.monthresourceamount, _this.xiaowuzhong.monthinvitationamount,
+                                _this.xiaowuzhong.monthcomeamount, _this.xiaowuzhong.monthsignamount);
+                            }, _this.randomInt(2, 5))
+                            setTimeout(()=>{
+                                _this.initBar2(_this.xiaowuzhong.dayserviceonlinenum, _this.xiaowuzhong.dayconverastionamount,
+                                _this.xiaowuzhong.dayaccountconsumer, _this.xiaowuzhong.dayclewconversation);
+                            }, _this.randomInt(2, 5))
+
+                            } else if (json.fromchan == 1) {
+                                // console.log(Number(json.daytotalsignamount))
+                                _this.shangjihezi = json;
+                                _this.count1.update(_this.shangjihezi.daytotalsignamount);
+                                _this.count2.update(_this.shangjihezi.daytotalsignsingleamount);
+                                _this.count3.update(_this.shangjihezi.daytotalsignprice);
+                                // 地图 start
+                                _this.mapCharts = echarts.init(document.getElementById('map-charts'));
+                                clearInterval(_this.mapTimer);
+                                _this.sjEcharts.signData = _this.groupArr2(_this.shangjihezi.mapsignamount);
+                                _this.sjEcharts.visitData = _this.groupArr2(_this.shangjihezi.mapcomevisitamount);
+                                _this.mapTimer = setInterval(() => {
+                                    _this.num = _this.num ? --_this.num : ++_this.num;
+                                    _this.initMap(_this.arr[_this.num], _this.num);
+                                }, 8000)
+
+                                _this.arr = [_this.sjEcharts.signData, _this.sjEcharts.visitData];
+                                _this.initMap(_this.arr[_this.num], _this.num);
+                                // 地图 end
+                            setTimeout(()=>{
+                                _this.initEchartsByBusinessOne(_this.shangjihezi.monthsignsingleamount, _this
+                                    .sjTotalData)
+                                _this.initEchartsByBusinessTwo(_this.shangjihezi.monthsignprice, _this.sjTotalData)
+                            }, _this.randomInt(2, 5))
+                            setTimeout(()=>{
+                                _this.initEchartsByTmk(_this.shangjihezi.dayresourceamount, _this.shangjihezi.dayinvitationamount,_this.shangjihezi.daycallamount, _this.sjTotalData)
+                            }, _this.randomInt(2, 5))
+                            setTimeout(()=>{
+                                _this.initEchartsByStatistics(_this.shangjihezi.daysignamount, _this.shangjihezi.daycomeamount, _this.shangjihezi.daysignsingleamount, _this.shangjihezi.daysignprice, _this.sjTotalData)
+                            }, _this.randomInt(2, 5))
+                            setTimeout(()=>{
+                                _this.initFunnel(_this.shangjihezi.monthresourceamount, _this.shangjihezi.monthinvitationamount,_this.shangjihezi.monthcomeamount, _this.shangjihezi.monthsignamount);
+                            }, _this.randomInt(2, 5))
+                            setTimeout(()=>{
+                                _this.initBar(_this.shangjihezi.dayserviceonlinenum, _this.shangjihezi.dayconverastionamount, _this.shangjihezi.dayaccountconsumer, _this.shangjihezi.dayclewconversation);
+                            }, _this.randomInt(2, 5))
+
+                            }
+                        }
+                    }).catch(function (error) {
+                        console.log(error)
+                    })
+                },
+                countScroll() {
+                    var options = {
+                        useEasing: true,
+                        useGrouping: true,
+                        separator: ',',
+                        decimal: '.',
+                    };
+                    this.count1 = new CountUp('number_1', 0, 0, 0, 1.5, options);
+                    this.count2 = new CountUp('number_2', 0, 0, 0, 1.5, options);
+                    this.count3 = new CountUp('number_3', 0, 0, 2, 1.5, options);
+                    this.count4 = new CountUp('number_4', 0, 0, 0, 1.5, options);
+                    this.count5 = new CountUp('number_5', 0, 0, 0, 1.5, options);
+                    this.count6 = new CountUp('number_6', 0, 0, 2, 1.5, options);
+                    // if (!this.count1.error) {
+                    //     this.count1.start();
+                    // } else {
+                    //     console.error(this.count1.error);
+                    // }
+                    // if (!this.count1.error) {
+                    //     this.count1.start();
+                    // } else {
+                    //     console.error(this.count1.error);
+                    // }
+                    // if (!this.count1.error) {
+                    //     this.count1.start();
+                    // } else {
+                    //     console.error(this.count1.error);
+                    // }
+                }
+            },
+            mounted() {
+                document.getElementById('wrapper').style.display = 'block';
+
+                this.chartssize2();
+                // this.chartssize($("#map-charts"))
+                // this.chartssize($("#map-charts2"))
+                // this.chartssize2($("#funnel-charts"))
+                // this.chartssize($("#funnel-charts2"))
+                // this.chartssize($("#bar-charts"))
+                // this.chartssize($("#bar-charts2"))
+                // this.chartssize($("#echarts_tmk"))
+                // this.chartssize($("#echarts_tmk2"))
+                // this.chartssize($("#echarts_statistics"))
+                // this.chartssize($("#echarts_statistics2"))
+                // this.chartssize($("#echarts_business1"))
+                // this.chartssize($("#echarts_business11"))
+                // this.chartssize($("#echarts_business2"))
+                // this.chartssize($("#echarts_business22"))
+
+                this.getJson()
+                this.initSwiper();
+                this.countScroll()
+
+
+                /* 响应式 */
+                window.onresize = function () {
+                    mainVM.chartssize2();
+                    
+                    // mainVM.chartssize($("#map-charts"))
+                    // mainVM.chartssize($("#map-charts"))
+                    // mainVM.chartssize($("#map-charts2"))
+                    // mainVM.chartssize($("#funnel-charts"))
+                    // mainVM.chartssize($("#funnel-charts2"))
+                    // mainVM.chartssize($("#bar-charts"))
+                    // mainVM.chartssize($("#bar-charts2"))
+                    // mainVM.chartssize($("#echarts_tmk"))
+                    // mainVM.chartssize($("#echarts_tmk2"))
+                    // mainVM.chartssize($("#echarts_statistics"))
+                    // mainVM.chartssize($("#echarts_statistics2"))
+                    // mainVM.chartssize($("#echarts_business1"))
+                    // mainVM.chartssize($("#echarts_business11"))
+                    // mainVM.chartssize($("#echarts_business2"))
+                    // mainVM.chartssize($("#echarts_business22"))
+
+                    mainVM.mapCharts.resize();
+                    mainVM.mapCharts2.resize();
+                    mainVM.sjEcharts.funnelCharts.resize();
+                    mainVM.sjEcharts.barCharts.resize();
+                    mainVM.sjEcharts.myChartOne.resize()
+                    mainVM.sjEcharts.myChartTwo.resize()
+                    mainVM.sjEcharts.myChartTmk.resize()
+                    mainVM.sjEcharts.myChartStatistics.resize()
+
+                    mainVM.xwzEcharts.funnelCharts.resize();
+                    mainVM.xwzEcharts.barCharts.resize();
+                    mainVM.xwzEcharts.myChartOne.resize()
+                    mainVM.xwzEcharts.myChartTwo.resize()
+                    mainVM.xwzEcharts.myChartTmk.resize()
+                    mainVM.xwzEcharts.myChartStatistics.resize()
+                    
+                }
+
+                // setInterval(()=>{ // 整体数据请求;
+                //     this.getJson2()
+                // }, 18000)
+            },
+            created() {
+                var day = new Date(); // 当前月份
+                this.month = day.getMonth() + 1;
+                this.time = this.dataFormat(); // 当前时间
+                setInterval(() => {
+                    this.time = this.dataFormat();
+                }, 1000)
+            }
+        })
+    </script>
+</body>
+
+</html>

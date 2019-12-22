@@ -1,0 +1,343 @@
+[v-cloak] {
+  display: none;
+}
+body {
+  background: url("../images/1@3x.png") no-repeat;
+  background-size: 100% 100%;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.wrapper {
+  width: 100%;
+  height: 100%;
+}
+@font-face {
+  font-family: unidreamLED;
+  src: url("fonts/UnidreamLED.ttf");
+  /* IE9+  HTML节点的lang="en" 记得去掉，不然会谷歌浏览器会自动翻译导致字体不正确 */
+}
+.number {
+  font-family: unidreamLED;
+  font-size: 1.625rem;
+  color: #27DBF3;
+}
+.content {
+  width: 100%;
+  height: 100%;
+  font-size: 1.125rem;
+  color: #27DBF3;
+  display: flex;
+  flex-direction: column;
+}
+.swiper-container {
+  width: 100%;
+  height: 100%;
+  flex: 1;
+}
+.swiper-container .swiper-slide {
+  width: 100%;
+}
+.cockpit-container {
+  display: flex;
+  height: 100%;
+  padding: 0 3.75rem;
+}
+.cockpit-container h3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-left: 1.625rem;
+  height: 3.25rem;
+  line-height: 3.25rem;
+  font-size: 1.125rem;
+}
+.cockpit-header {
+  position: relative;
+  height: 5.5rem;
+}
+.cockpit-header h2 {
+  line-height: 5.5rem;
+  font-size: 2.25rem;
+  color: #27DBF3;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 2px;
+}
+.cockpit-header .header-info-left {
+  position: absolute;
+  top: 1rem;
+  left: 3.75rem;
+  color: #21C4EE;
+  height: 1.625rem;
+  display: flex;
+  align-items: center;
+  line-height: 1.625rem;
+  font-size: 1.25rem;
+  letter-spacing: 3px;
+}
+.cockpit-header .header-info-left span {
+  display: inline-block;
+  margin: 0 0.1875rem;
+  padding: 0 0.25rem 0 0.3125rem;
+  font-family: unidreamLED;
+  line-height: 1.625rem;
+  font-size: 1.5rem;
+  text-align: center;
+  background: #021029;
+}
+.cockpit-header .header-info-left i {
+  font-weight: 700;
+}
+.cockpit-header .header-info-right {
+  display: flex;
+  position: absolute;
+  top: 1rem;
+  right: 3.75rem;
+  letter-spacing: 2px;
+}
+.cockpit-header .header-info-right li {
+  padding: 0 1.375rem;
+  height: 1.625rem;
+  line-height: 1.625rem;
+  text-align: center;
+  color: #fff;
+  cursor: pointer;
+}
+.cockpit-header .header-info-right .active {
+  color: #27DBF3;
+}
+.cockpit-header .header-info-right .active i {
+  background: url('../images/1-1@3x.png') no-repeat;
+  background-size: 100%;
+}
+.cockpit-header .header-info-right li:first-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cockpit-header .header-info-right i {
+  display: block;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin-right: 0.25rem;
+  background: url('../images/1-2@3x.png') no-repeat;
+  background-size: 100%;
+}
+.gauge-box {
+  box-sizing: border-box;
+  padding: 0 2rem 0 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.gauge {
+  width: 14.6875rem;
+  height: 11.6875rem;
+  background: url('../images/6@3x.png') no-repeat;
+  background-size: 14.6875rem 11.6875rem;
+  background-position: center;
+  text-align: center;
+  padding-top: 2.375rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.gauge div {
+  font-size: 1rem;
+  color: #fff;
+}
+.gauge p {
+  font-family: unidreamLED;
+  line-height: 4.375rem;
+  font-size: 3.125rem;
+  color: #27DBF3;
+}
+.left-top,
+.right-top,
+.left-center,
+.left-bottom,
+.right-center,
+.right-bottom {
+  position: relative;
+  padding-top: 3.25rem;
+  padding-bottom: 0.9375rem;
+  box-sizing: border-box;
+}
+.left-top,
+.right-top {
+  width: 29.4375rem;
+  height: 18.4375rem;
+  background: url("../images/4@3x.png") no-repeat;
+  background-size: 100% 100%;
+}
+.left-center,
+.left-bottom,
+.right-center,
+.right-bottom {
+  width: 29.4375rem;
+  height: 18.4375rem;
+  background: url("../images/5@3x.png") no-repeat;
+  background-size: 100% 100%;
+}
+.box-center {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 5.3125rem;
+  padding-top: 6.25rem;
+}
+.box-center .center-center {
+  flex: 1;
+}
+.box-center .center-top ul {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.box-center .center-top ul li {
+  position: relative;
+  margin: 0 0.9375rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-width: 6.875rem;
+  padding: 1.125rem 2.25rem 0;
+  font-size: 0.875rem;
+  text-align: center;
+  border: 2px solid #2f3f77;
+}
+.box-center .center-top ul li span {
+  font-size: 0.75rem;
+  display: inline-block;
+  vertical-align: bottom;
+}
+.box-center .center-top ul li i {
+  position: absolute;
+  display: inline-block;
+  background-repeat: no-repeat;
+  z-index: 1;
+  width: 1.125rem;
+  height: 1.125rem;
+}
+.box-center .center-top ul li .topleft {
+  top: -2px;
+  left: -2px;
+  background: url("../images/jiao01@3x.png");
+  background-size: 100%;
+}
+.box-center .center-top ul li .topright {
+  top: -2px;
+  right: -2px;
+  background: url("../images/jiao02@3x.png");
+  background-size: 100%;
+}
+.box-center .center-top ul li .bottomleft {
+  bottom: -2px;
+  left: -2px;
+  background: url("../images/jiao03@3x.png");
+  background-size: 100%;
+}
+.box-center .center-top ul li .bottomright {
+  bottom: -2px;
+  right: -2px;
+  background: url("../images/jiao04@3x.png");
+  background-size: 100%;
+}
+.box-center .center-top ul p {
+  font-family: unidreamLED;
+  line-height: 4.5rem;
+  font-size: 3.5rem;
+  color: #27DBF3;
+}
+.box-center .circle-wrap {
+  position: absolute;
+  top: 10%;
+  left: 15%;
+  width: 12.375rem;
+  border: 1px solid #27dbf2;
+  background: transparent;
+  box-sizing: border-box;
+  display: flex;
+}
+.box-center .sign-circle,
+.box-center .visit-circle {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  height: 2.25rem;
+  line-height: 2.25rem;
+  font-size: 1rem;
+}
+.box-center .sign-circle i,
+.box-center .visit-circle i {
+  display: inline-block;
+  vertical-align: middle;
+  width: 0.625rem;
+  height: 0.625rem;
+  background: #fae07f;
+  border-radius: 50%;
+  margin-right: 0.3125rem;
+}
+.box-center .sign-circle i {
+  background: #1193A4;
+}
+.box-center .act {
+  background: #27DBF3;
+  color: #10275B;
+}
+.box-left {
+  box-sizing: border-box;
+  width: 29.4375rem;
+  height: 100%;
+  padding: 0.15625rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.box-right {
+  box-sizing: border-box;
+  width: 29.4375rem;
+  height: 100%;
+  padding: 0.15625rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.map-box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.pie-charts01 {
+  height: 25%;
+  margin-bottom: 1%;
+}
+.pie-charts02 {
+  height: 100%;
+  margin-top: 1.125rem;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 0.4375rem;
+  box-sizing: border-box;
+}
+.pie-charts02 .box {
+  margin-top: 0.0625rem;
+  width: 12.25rem;
+  height: 12.25rem;
+}
+.box {
+  width: 100%;
+  height: 100%;
+}
+.echarts_tmk {
+  width: 100%;
+  height: 100%;
+}
