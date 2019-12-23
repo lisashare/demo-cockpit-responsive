@@ -2151,17 +2151,7 @@
                     };
                     this.xwzEcharts.barCharts.setOption(barOption);
                 },
-                //参数container为图表盒子节点.charts为图表节点
-                chartssize(charts, container) {
-                    if (!container) {
-                        container = charts.parent(".box");
-                    }
-                    var wi = container.width();
-                    var hi = container.height();
-                    charts.width(wi)
-                    charts.height(hi)
-                },
-                chartssize2() {
+                chartssize() {
                     var oele = $(".charts");
                     for (var i = 0;i<oele.length;i++) {
                         var container = $(oele[i]).parent(".box");
@@ -2186,7 +2176,7 @@
                         speed: 1000,
                         // loop: false,
                         autoplay: 300000,
-                        onSlideChangeStart: function () {
+                        onSlideChangeStart: function (param) {
                             var index = mainVM.mySwiper.activeIndex;
                             $('.nav-tab li').removeClass('active').eq(index).addClass('active');
                         }
@@ -2403,14 +2393,14 @@
             mounted() {
                 document.getElementById('wrapper').style.display = 'block';
 
-                this.chartssize2()
-                this.getJson()
+                this.chartssize();
+                this.getJson();
                 this.initSwiper();
-                this.countScroll()
+                this.countScroll();
 
                 /* 响应式 */
                 window.onresize = function () {
-                    mainVM.chartssize2();
+                    mainVM.chartssize();
                     mainVM.mapCharts.resize();
                     mainVM.mapCharts2.resize();
                     mainVM.sjEcharts.funnelCharts.resize();
