@@ -430,24 +430,25 @@
                             splitArea: {
                                 show: false
                             },
-                            indicator: [{
+                            indicator: [
+                                {
                                     name: '签约量',
-                                    max: totalData.totalDaySignAmount,
+                                    max: daySign >= totalData.totalDaySignAmount ?daySign : totalData.totalDaySignAmount,
                                     num: daySign
                                 },
                                 {
                                     name: '来访量',
-                                    max: totalData.totalDayComeAmount,
+                                    max: dayCome >= totalData.totalDayComeAmount ?dayCome : totalData.totalDayComeAmount,
                                     num: dayCome
                                 },
                                 {
                                     name: '签约单量',
-                                    max: totalData.totalDaySignSingleAmount,
+                                    max: daySignSingle >=totalData.totalDaySignSingleAmount ? daySignSingle : totalData.totalDaySignSingleAmount ,
                                     num: daySignSingle
                                 },
                                 {
                                     name: '签约金额',
-                                    max: totalData.totalDaySignPrice,
+                                    max: Math.round(daySignPrice) >= totalData.totalDaySignPrice ? daySignPrice : totalData.totalDaySignPrice,
                                     num: daySignPrice
                                 },
                             ],
@@ -483,6 +484,7 @@
                 },
                 //商务统计 2
                 initEchartsByStatistics2(daySign, dayCome, daySignSingle, daySignPrice, totalData) {
+                    
                     this.xwzEcharts.myChartStatistics = echarts.init(document.getElementById(
                         'echarts_statistics2'));
                     this.xwzEcharts.myChartStatistics.clear()
@@ -539,24 +541,25 @@
                             splitArea: {
                                 show: false
                             },
-                            indicator: [{
+                            indicator: [
+                                {
                                     name: '签约量',
-                                    max: totalData.totalDaySignAmount,
+                                    max: daySign >= totalData.totalDaySignAmount ?daySign : totalData.totalDaySignAmount,
                                     num: daySign
                                 },
                                 {
                                     name: '来访量',
-                                    max: totalData.totalDayComeAmount,
+                                    max: dayCome >= totalData.totalDayComeAmount ?dayCome : totalData.totalDayComeAmount,
                                     num: dayCome
                                 },
                                 {
                                     name: '签约单量',
-                                    max: totalData.totalDaySignSingleAmount,
+                                    max: daySignSingle >=totalData.totalDaySignSingleAmount ? daySignSingle : totalData.totalDaySignSingleAmount ,
                                     num: daySignSingle
                                 },
                                 {
                                     name: '签约金额',
-                                    max: totalData.totalDaySignPrice,
+                                    max: Math.round(daySignPrice) >= totalData.totalDaySignPrice ? daySignPrice : totalData.totalDaySignPrice,
                                     num: daySignPrice
                                 },
                             ],
@@ -704,7 +707,7 @@
                                         }
                                     },
                                     {
-                                        value: item.total - item.value,
+                                        value: item.total - item.value <= 0 ?item.value:item.total,
                                         name: '',
                                         tooltip: {
                                             show: false
@@ -824,7 +827,7 @@
                                         }
                                     },
                                     {
-                                        value: item.total - item.value,
+                                        value: item.total - item.value <= 0 ?item.value:item.total,
                                         name: '',
                                         tooltip: {
                                             show: false
@@ -891,7 +894,7 @@
                                     name: ''
                                 },
                                 {
-                                    value: totalNum.totalMonthSignSingleAmount - jsonData,
+                                    value: totalNum.totalMonthSignSingleAmount - jsonData <= 0 ? 0: totalNum.totalMonthSignSingleAmount - jsonData,
                                     name: ''
                                 },
 
@@ -1012,7 +1015,7 @@
                                     name: ''
                                 },
                                 {
-                                    value: totalNum.totalMonthSignSingleAmount - jsonData,
+                                    value: totalNum.totalMonthSignSingleAmount - jsonData <= 0 ?0 :totalNum.totalMonthSignSingleAmount - jsonData ,
                                     name: ''
                                 },
 
@@ -1132,7 +1135,7 @@
                                     name: ''
                                 },
                                 {
-                                    value: totalNum.totalMonthSignPrice - jsonData,
+                                    value: totalNum.totalMonthSignPrice - jsonData <=0 ?0 :totalNum.totalMonthSignPrice - jsonData,
                                     name: ''
                                 },
 
@@ -1271,7 +1274,7 @@
                                     name: ''
                                 },
                                 {
-                                    value: totalNum.totalMonthSignPrice - jsonData,
+                                    value: totalNum.totalMonthSignPrice - jsonData <= 0 ?0 :totalNum.totalMonthSignPrice - jsonData,
                                     name: ''
                                 },
 
@@ -2174,7 +2177,7 @@
                         // },
                         speed: 1000,
                         // loop: false,
-                        // autoplay: 10000,
+                        autoplay: 20000,
                         onSlideChangeStart: function () {
                             var index = mainVM.mySwiper.activeIndex;
                             $('.nav-tab li').removeClass('active').eq(index).addClass('active');
@@ -2231,100 +2234,13 @@
                     }
                     return result;
                 },
-                listUniq(list){
-                    var arr = [];
-                    for(var i=0;i<list.length;i++){
-                    }
-                    return ;
-                },
                 randomInt( min,max ){
                     if( min>max ){
                     var t=min;
                     min=max;
                     max=t;	}
                     return Math.floor(   Math.random()*( max-min+1 )+min  )*1000  },
-                getJson() {
-                    var _this = this;
-                    axios({
-                        method: 'get',
-                        url: "http://192.168.8.142:8088/operation/info"
-                    }).then(function (res) {
-                        var res = JSON.parse(res.data.msg).DataList;
-                        console.log('res', res);
-                        for (var i = 0; i < res.length; i++) {
-                            var json = res[i];
-                            if (json.fromchan == 2) {
-                                _this.count4.update(json.daytotalsignamount);
-                                _this.count5.update(json.daytotalsignsingleamount);
-                                _this.count6.update(json.daytotalsignprice);
-                                _this.xiaowuzhong = json;
-                                // 地图 start
-                                _this.mapCharts2 = echarts.init(document.getElementById('map-charts2'));
-                                clearInterval(_this.mapTimer2);
-                                _this.xwzEcharts.signData = _this.groupArr2(_this.xiaowuzhong
-                                    .mapsignamount);
-                                _this.xwzEcharts.visitData = _this.groupArr2(_this.xiaowuzhong
-                                    .mapcomevisitamount);
-
-                                _this.mapTimer2 = setInterval(() => {
-                                    _this.num2 = _this.num2 ? --_this.num2 : ++_this.num2;
-                                    _this.initMap2(_this.arr2[_this.num2], _this.num2);
-                                }, 8000)
-                                _this.arr2 = [_this.xwzEcharts.signData, _this.xwzEcharts.visitData];
-                                _this.initMap2(_this.arr2[_this.num2], _this.num2);
-                                // 地图 end
-
-                                _this.initEchartsByBusinessOne2(json.monthsignsingleamount, _this
-                                    .xwzTotalData)
-                                _this.initEchartsByBusinessTwo2(json.monthsignprice, _this.xwzTotalData)
-                                _this.initEchartsByTmk2(json.dayresourceamount, json
-                                    .dayinvitationamount, json.daycallamount, _this.xwzTotalData)
-                                _this.initEchartsByStatistics2(json.daysignamount, json.daycomeamount,
-                                    json.daysignsingleamount, json.daysignprice, _this.xwzTotalData)
-                                _this.initFunnel2(json.monthresourceamount, json.monthinvitationamount,
-                                    json.monthcomeamount, json.monthsignamount);
-                                _this.initBar2(json.dayserviceonlinenum, json.dayconverastionamount,
-                                    json.dayaccountconsumer, json.dayclewconversation);
-
-                            } else if (json.fromchan == 1) {
-                                // console.log(Number(json.daytotalsignamount))
-                                _this.count1.update(json.daytotalsignamount);
-                                _this.count2.update(json.daytotalsignsingleamount);
-                                _this.count3.update(json.daytotalsignprice);
-                                _this.shangjihezi = json;
-                                // 地图 start
-                                _this.mapCharts = echarts.init(document.getElementById('map-charts'));
-                                clearInterval(_this.mapTimer);
-                                _this.sjEcharts.signData = _this.groupArr2(_this.shangjihezi.mapsignamount);
-                                _this.sjEcharts.visitData = _this.groupArr2(_this.shangjihezi.mapcomevisitamount);
-                                _this.mapTimer = setInterval(() => {
-                                    _this.num = _this.num ? --_this.num : ++_this.num;
-                                    _this.initMap(_this.arr[_this.num], _this.num);
-                                }, 8000)
-
-                                _this.arr = [_this.sjEcharts.signData, _this.sjEcharts.visitData];
-                                _this.initMap(_this.arr[_this.num], _this.num);
-                                // 地图 end
-
-                                _this.initEchartsByBusinessOne(json.monthsignsingleamount, _this
-                                    .sjTotalData)
-                                _this.initEchartsByBusinessTwo(json.monthsignprice, _this.sjTotalData)
-                                _this.initEchartsByTmk(json.dayresourceamount, json.dayinvitationamount,
-                                    json.daycallamount, _this.sjTotalData)
-                                _this.initEchartsByStatistics(json.daysignamount, json.daycomeamount,
-                                    json.daysignsingleamount, json.daysignprice, _this.sjTotalData)
-                                _this.initFunnel(json.monthresourceamount, json.monthinvitationamount,
-                                    json.monthcomeamount, json.monthsignamount);
-                                _this.initBar(json.dayserviceonlinenum, json.dayconverastionamount, json
-                                    .dayaccountconsumer, json.dayclewconversation);
-
-                            }
-                        }
-                    }).catch(function (error) {
-                        console.log(error)
-                    })
-                },
-                getJson2() {
+                getJson(type) {
                     var _this = this;
                     axios({
                         method: 'get',
@@ -2354,26 +2270,40 @@
                                 _this.arr2 = [_this.xwzEcharts.signData, _this.xwzEcharts.visitData];
                                 _this.initMap2(_this.arr2[_this.num2], _this.num2);
                                 // 地图 end
-                            setTimeout(()=>{
-                                _this.initEchartsByBusinessOne2(_this.xiaowuzhong.monthsignsingleamount, _this.xwzTotalData)
-                                _this.initEchartsByBusinessTwo2(_this.xiaowuzhong.monthsignprice, _this.xwzTotalData)
-                            }, _this.randomInt(2, 5))
-                            setTimeout(()=>{
-                                _this.initEchartsByTmk2(_this.xiaowuzhong.dayresourceamount, _this.xiaowuzhong
-                                    .dayinvitationamount, _this.xiaowuzhong.daycallamount, _this.xwzTotalData)
-                            }, _this.randomInt(2, 5))
-                            setTimeout(()=>{
-                                _this.initEchartsByStatistics2(_this.xiaowuzhong.daysignamount, _this.xiaowuzhong.daycomeamount,
-                                _this.xiaowuzhong.daysignsingleamount, _this.xiaowuzhong.daysignprice, _this.xwzTotalData)
-                            }, _this.randomInt(2, 5))
-                            setTimeout(()=>{
-                                _this.initFunnel2(_this.xiaowuzhong.monthresourceamount, _this.xiaowuzhong.monthinvitationamount,
-                                _this.xiaowuzhong.monthcomeamount, _this.xiaowuzhong.monthsignamount);
-                            }, _this.randomInt(2, 5))
-                            setTimeout(()=>{
-                                _this.initBar2(_this.xiaowuzhong.dayserviceonlinenum, _this.xiaowuzhong.dayconverastionamount,
-                                _this.xiaowuzhong.dayaccountconsumer, _this.xiaowuzhong.dayclewconversation);
-                            }, _this.randomInt(2, 5))
+                            if(type){
+                                setTimeout(()=>{
+                                    _this.initEchartsByBusinessOne2(_this.xiaowuzhong.monthsignsingleamount, _this.xwzTotalData)
+                                    _this.initEchartsByBusinessTwo2(_this.xiaowuzhong.monthsignprice, _this.xwzTotalData)
+                                }, _this.randomInt(2, 5))
+                                setTimeout(()=>{
+                                    _this.initEchartsByTmk2(_this.xiaowuzhong.dayresourceamount, _this.xiaowuzhong
+                                        .dayinvitationamount, _this.xiaowuzhong.daycallamount, _this.xwzTotalData)
+                                }, _this.randomInt(2, 5))
+                                setTimeout(()=>{
+                                    _this.initEchartsByStatistics2(_this.xiaowuzhong.daysignamount, _this.xiaowuzhong.daycomeamount,
+                                    _this.xiaowuzhong.daysignsingleamount, _this.xiaowuzhong.daysignprice, _this.xwzTotalData)
+                                }, _this.randomInt(2, 5))
+                                setTimeout(()=>{
+                                    _this.initFunnel2(_this.xiaowuzhong.monthresourceamount, _this.xiaowuzhong.monthinvitationamount,
+                                    _this.xiaowuzhong.monthcomeamount, _this.xiaowuzhong.monthsignamount);
+                                }, _this.randomInt(2, 5))
+                                setTimeout(()=>{
+                                    _this.initBar2(_this.xiaowuzhong.dayserviceonlinenum, _this.xiaowuzhong.dayconverastionamount,
+                                    _this.xiaowuzhong.dayaccountconsumer, _this.xiaowuzhong.dayclewconversation);
+                                }, _this.randomInt(2, 5))
+                            }else{
+                                _this.initEchartsByBusinessOne2(json.monthsignsingleamount, _this
+                                    .xwzTotalData)
+                                _this.initEchartsByBusinessTwo2(json.monthsignprice, _this.xwzTotalData)
+                                _this.initEchartsByTmk2(json.dayresourceamount, json
+                                    .dayinvitationamount, json.daycallamount, _this.xwzTotalData)
+                                _this.initEchartsByStatistics2(json.daysignamount, json.daycomeamount,
+                                    json.daysignsingleamount, json.daysignprice, _this.xwzTotalData)
+                                _this.initFunnel2(json.monthresourceamount, json.monthinvitationamount,
+                                    json.monthcomeamount, json.monthsignamount);
+                                _this.initBar2(json.dayserviceonlinenum, json.dayconverastionamount,
+                                    json.dayaccountconsumer, json.dayclewconversation);
+                            }
 
                             } else if (json.fromchan == 1) {
                                 // console.log(Number(json.daytotalsignamount))
@@ -2394,23 +2324,37 @@
                                 _this.arr = [_this.sjEcharts.signData, _this.sjEcharts.visitData];
                                 _this.initMap(_this.arr[_this.num], _this.num);
                                 // 地图 end
-                            setTimeout(()=>{
-                                _this.initEchartsByBusinessOne(_this.shangjihezi.monthsignsingleamount, _this
+                                if(type){
+                                    setTimeout(()=>{
+                                        _this.initEchartsByBusinessOne(_this.shangjihezi.monthsignsingleamount, _this
+                                            .sjTotalData)
+                                        _this.initEchartsByBusinessTwo(_this.shangjihezi.monthsignprice, _this.sjTotalData)
+                                    }, _this.randomInt(2, 5))
+                                    setTimeout(()=>{
+                                        _this.initEchartsByTmk(_this.shangjihezi.dayresourceamount, _this.shangjihezi.dayinvitationamount,_this.shangjihezi.daycallamount, _this.sjTotalData)
+                                    }, _this.randomInt(2, 5))
+                                    setTimeout(()=>{
+                                        _this.initEchartsByStatistics(_this.shangjihezi.daysignamount, _this.shangjihezi.daycomeamount, _this.shangjihezi.daysignsingleamount, _this.shangjihezi.daysignprice, _this.sjTotalData)
+                                    }, _this.randomInt(2, 5))
+                                    setTimeout(()=>{
+                                        _this.initFunnel(_this.shangjihezi.monthresourceamount, _this.shangjihezi.monthinvitationamount,_this.shangjihezi.monthcomeamount, _this.shangjihezi.monthsignamount);
+                                    }, _this.randomInt(2, 5))
+                                    setTimeout(()=>{
+                                        _this.initBar(_this.shangjihezi.dayserviceonlinenum, _this.shangjihezi.dayconverastionamount, _this.shangjihezi.dayaccountconsumer, _this.shangjihezi.dayclewconversation);
+                                    }, _this.randomInt(2, 5))
+                                }else{
+                                    _this.initEchartsByBusinessOne(json.monthsignsingleamount, _this
                                     .sjTotalData)
-                                _this.initEchartsByBusinessTwo(_this.shangjihezi.monthsignprice, _this.sjTotalData)
-                            }, _this.randomInt(2, 5))
-                            setTimeout(()=>{
-                                _this.initEchartsByTmk(_this.shangjihezi.dayresourceamount, _this.shangjihezi.dayinvitationamount,_this.shangjihezi.daycallamount, _this.sjTotalData)
-                            }, _this.randomInt(2, 5))
-                            setTimeout(()=>{
-                                _this.initEchartsByStatistics(_this.shangjihezi.daysignamount, _this.shangjihezi.daycomeamount, _this.shangjihezi.daysignsingleamount, _this.shangjihezi.daysignprice, _this.sjTotalData)
-                            }, _this.randomInt(2, 5))
-                            setTimeout(()=>{
-                                _this.initFunnel(_this.shangjihezi.monthresourceamount, _this.shangjihezi.monthinvitationamount,_this.shangjihezi.monthcomeamount, _this.shangjihezi.monthsignamount);
-                            }, _this.randomInt(2, 5))
-                            setTimeout(()=>{
-                                _this.initBar(_this.shangjihezi.dayserviceonlinenum, _this.shangjihezi.dayconverastionamount, _this.shangjihezi.dayaccountconsumer, _this.shangjihezi.dayclewconversation);
-                            }, _this.randomInt(2, 5))
+                                    _this.initEchartsByBusinessTwo(json.monthsignprice, _this.sjTotalData)
+                                    _this.initEchartsByTmk(json.dayresourceamount, json.dayinvitationamount,
+                                        json.daycallamount, _this.sjTotalData)
+                                    _this.initEchartsByStatistics(json.daysignamount, json.daycomeamount,
+                                        json.daysignsingleamount, json.daysignprice, _this.sjTotalData)
+                                    _this.initFunnel(json.monthresourceamount, json.monthinvitationamount,
+                                        json.monthcomeamount, json.monthsignamount);
+                                    _this.initBar(json.dayserviceonlinenum, json.dayconverastionamount, json
+                                        .dayaccountconsumer, json.dayclewconversation);
+                                }
 
                             }
                         }
@@ -2451,21 +2395,7 @@
             mounted() {
                 document.getElementById('wrapper').style.display = 'block';
 
-                this.chartssize2();
-                // this.chartssize($("#map-charts"))
-                // this.chartssize($("#map-charts2"))
-                // this.chartssize2($("#funnel-charts"))
-                // this.chartssize($("#funnel-charts2"))
-                // this.chartssize($("#bar-charts"))
-                // this.chartssize($("#bar-charts2"))
-                // this.chartssize($("#echarts_tmk"))
-                // this.chartssize($("#echarts_tmk2"))
-                // this.chartssize($("#echarts_statistics"))
-                // this.chartssize($("#echarts_statistics2"))
-                // this.chartssize($("#echarts_business1"))
-                // this.chartssize($("#echarts_business11"))
-                // this.chartssize($("#echarts_business2"))
-                // this.chartssize($("#echarts_business22"))
+                this.chartssize2()
 
                 this.getJson()
                 this.initSwiper();
@@ -2475,23 +2405,6 @@
                 /* 响应式 */
                 window.onresize = function () {
                     mainVM.chartssize2();
-                    
-                    // mainVM.chartssize($("#map-charts"))
-                    // mainVM.chartssize($("#map-charts"))
-                    // mainVM.chartssize($("#map-charts2"))
-                    // mainVM.chartssize($("#funnel-charts"))
-                    // mainVM.chartssize($("#funnel-charts2"))
-                    // mainVM.chartssize($("#bar-charts"))
-                    // mainVM.chartssize($("#bar-charts2"))
-                    // mainVM.chartssize($("#echarts_tmk"))
-                    // mainVM.chartssize($("#echarts_tmk2"))
-                    // mainVM.chartssize($("#echarts_statistics"))
-                    // mainVM.chartssize($("#echarts_statistics2"))
-                    // mainVM.chartssize($("#echarts_business1"))
-                    // mainVM.chartssize($("#echarts_business11"))
-                    // mainVM.chartssize($("#echarts_business2"))
-                    // mainVM.chartssize($("#echarts_business22"))
-
                     mainVM.mapCharts.resize();
                     mainVM.mapCharts2.resize();
                     mainVM.sjEcharts.funnelCharts.resize();
@@ -2510,9 +2423,9 @@
                     
                 }
 
-                // setInterval(()=>{ // 整体数据请求;
-                //     this.getJson2()
-                // }, 18000)
+                setInterval(()=>{ // 整体数据请求;
+                    this.getJson(2)
+                }, 18000)
             },
             created() {
                 var day = new Date(); // 当前月份

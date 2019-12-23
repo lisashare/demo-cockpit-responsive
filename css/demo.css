@@ -141,7 +141,7 @@ body {
   background-size: 14.6875rem 11.6875rem;
   background-position: center;
   text-align: center;
-  padding-top: 2.375rem;
+  padding-top: 2.5rem;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -152,7 +152,7 @@ body {
   color: #fff;
 }
 .gauge p {
-  line-height: 3.125rem;
+  line-height: 3.75rem;
   font-size: 2.125rem;
   color: #27DBF3;
 }
