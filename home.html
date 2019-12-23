@@ -2159,13 +2159,6 @@
                         $(oele[i]).width(wi)
                         $(oele[i]).height(hi)
                     };
-                    // if (!container) {
-                    //     container = charts.parent(".box");
-                    // }
-                    // var wi = container.width();
-                    // var hi = container.height();
-                    // charts.width(wi)
-                    // charts.height(hi)
                 },
                 initSwiper() {
                     this.mySwiper = new Swiper('.swiper-container', {
@@ -2228,6 +2221,7 @@
                     return null;
                 },
                 groupArr2(data){
+                    if(!(data && data.length)){return false;}
                     var result = [];
                     for(var i=0;i<data.length;i++){
                         var arr = [];
@@ -2237,6 +2231,12 @@
                     }
                     return result;
                 },
+                listUniq(list){
+                    var arr = [];
+                    for(var i=0;i<list.length;i++){
+                    }
+                    return ;
+                },
                 randomInt( min,max ){
                     if( min>max ){
                     var t=min;
@@ -2245,18 +2245,18 @@
                     return Math.floor(   Math.random()*( max-min+1 )+min  )*1000  },
                 getJson() {
                     var _this = this;
-                    // axios({
-                    //     method: 'get',
-                    //     url: "http://192.168.8.142:8088/operation/info"
-                    // }).then(function (res) {
-                        // var res = JSON.parse(res.data.msg).DataList;
+                    axios({
+                        method: 'get',
+                        url: "http://192.168.8.142:8088/operation/info"
+                    }).then(function (res) {
+                        var res = JSON.parse(res.data.msg).DataList;
                         console.log('res', res);
                         for (var i = 0; i < res.length; i++) {
                             var json = res[i];
                             if (json.fromchan == 2) {
-                                // _this.count4.update(json.daytotalsignamount);
-                                // _this.count5.update(json.daytotalsignsingleamount);
-                                // _this.count6.update(json.daytotalsignprice);
+                                _this.count4.update(json.daytotalsignamount);
+                                _this.count5.update(json.daytotalsignsingleamount);
+                                _this.count6.update(json.daytotalsignprice);
                                 _this.xiaowuzhong = json;
                                 // 地图 start
                                 _this.mapCharts2 = echarts.init(document.getElementById('map-charts2'));
@@ -2288,9 +2288,9 @@
 
                             } else if (json.fromchan == 1) {
                                 // console.log(Number(json.daytotalsignamount))
-                                // _this.count1.update(json.daytotalsignamount);
-                                // _this.count2.update(json.daytotalsignsingleamount);
-                                // _this.count3.update(json.daytotalsignprice);
+                                _this.count1.update(json.daytotalsignamount);
+                                _this.count2.update(json.daytotalsignsingleamount);
+                                _this.count3.update(json.daytotalsignprice);
                                 _this.shangjihezi = json;
                                 // 地图 start
                                 _this.mapCharts = echarts.init(document.getElementById('map-charts'));
@@ -2320,9 +2320,9 @@
 
                             }
                         }
-                    // }).catch(function (error) {
-                    //     console.log(error)
-                    // })
+                    }).catch(function (error) {
+                        console.log(error)
+                    })
                 },
                 getJson2() {
                     var _this = this;

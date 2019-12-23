@@ -35,8 +35,8 @@ body {
 }
 .swiper-container {
   width: 100%;
-  height: 100%;
   flex: 1;
+  height: 61.875rem;
 }
 .swiper-container .swiper-slide {
   width: 100%;
@@ -61,7 +61,7 @@ body {
 }
 .cockpit-header h2 {
   line-height: 5.5rem;
-  font-size: 2.25rem;
+  font-size: 2rem;
   color: #27DBF3;
   font-weight: 600;
   text-align: center;
@@ -148,13 +148,12 @@ body {
   justify-content: center;
 }
 .gauge div {
-  font-size: 1rem;
+  font-size: 0.875rem;
   color: #fff;
 }
 .gauge p {
-  font-family: unidreamLED;
-  line-height: 4.375rem;
-  font-size: 3.125rem;
+  line-height: 3.125rem;
+  font-size: 2.125rem;
   color: #27DBF3;
 }
 .left-top,
@@ -188,11 +187,13 @@ body {
   display: flex;
   flex-direction: column;
   flex: 1;
-  width: 5.3125rem;
-  padding-top: 6.25rem;
+  width: 15rem;
+  height: 100%;
+  padding: 5.25rem 0 2.875rem;
 }
 .box-center .center-center {
   flex: 1;
+  height: 100%;
 }
 .box-center .center-top ul {
   box-sizing: border-box;
@@ -207,7 +208,7 @@ body {
   flex-direction: column;
   justify-content: space-around;
   min-width: 6.875rem;
-  padding: 1.125rem 2.25rem 0;
+  padding: 0.875rem 2.25rem 0;
   font-size: 0.875rem;
   text-align: center;
   border: 2px solid #2f3f77;
@@ -251,15 +252,15 @@ body {
 }
 .box-center .center-top ul p {
   font-family: unidreamLED;
-  line-height: 4.5rem;
-  font-size: 3.5rem;
+  line-height: 3.875rem;
+  font-size: 2.875rem;
   color: #27DBF3;
 }
 .box-center .circle-wrap {
   position: absolute;
   top: 10%;
   left: 15%;
-  width: 12.375rem;
+  width: 10rem;
   border: 1px solid #27dbf2;
   background: transparent;
   box-sizing: border-box;
@@ -272,9 +273,9 @@ body {
   align-items: center;
   justify-content: center;
   flex: 1;
-  height: 2.25rem;
-  line-height: 2.25rem;
-  font-size: 1rem;
+  height: 1.875rem;
+  line-height: 1.875rem;
+  font-size: 0.875rem;
 }
 .box-center .sign-circle i,
 .box-center .visit-circle i {
@@ -306,7 +307,7 @@ body {
   box-sizing: border-box;
   width: 29.4375rem;
   height: 100%;
-  padding: 0.15625rem 0;
+  padding: 1.375rem 0 2.875rem;
   display: flex;
   flex-direction: column;
   justify-content: space-around;

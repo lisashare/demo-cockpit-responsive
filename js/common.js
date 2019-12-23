@@ -58,7 +58,13 @@ const Public = {
     },
 };
 
+
 Public.pageResize();
-$(window).resize(() => {
-    Public.pageResize();
-});
+if (window.addEventListener) {
+    window.addEventListener('resize', function () {
+        Public.pageResize();
+    }, false)
+  }
+// $(window).resize(() => {
+//     Public.pageResize();
+// });
