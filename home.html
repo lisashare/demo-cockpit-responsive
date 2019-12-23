@@ -667,7 +667,7 @@
                             right: '20%',
                             data: dataMock,
                             padding: [0, 2],
-                            itemWidth: this.fontSize(0.14),
+                            itemWidth: this.fontSize(0.1),
                             formatter: function (name, value) {
                                 return "{title|" + name + "}     {value|" + (_this.arrayObj(dataMock,
                                     "name")[name].value) + "}"
@@ -787,7 +787,7 @@
                             right: '20%',
                             data: dataMock,
                             padding: [0, 2],
-                            itemWidth: this.fontSize(0.14),
+                            itemWidth: this.fontSize(0.1),
                             formatter: function (name, value) {
                                 return "{title|" + name + "}     {value|" + (_this.arrayObj(dataMock,
                                     "name")[name].value) + "}"
@@ -1408,7 +1408,7 @@
                                 color: '#27DBF3',
                                 fontSize: this.fontSize(0.14),
                             },
-                            itemWidth: this.fontSize(0.14), // 圆圈的宽
+                            itemWidth: this.fontSize(0.1), // 圆圈的宽
                             formatter: function (name) {
                                 return "{title|" + name + "}     {value|" + (_this.arrayObj(funnelData,
                                     "name")[name].value) + "}"
@@ -1512,7 +1512,7 @@
                                 color: '#27DBF3',
                                 fontSize: this.fontSize(0.14),
                             },
-                            itemWidth: this.fontSize(0.14), // 8
+                            itemWidth: this.fontSize(0.1), // 8
                             formatter: function (name) {
                                 return "{title|" + name + "}     {value|" + (_this.arrayObj(funnelData,
                                     "name")[name].value) + "}"
@@ -1916,7 +1916,6 @@
                         itemName.push(item.name);
                     });
                     var barOption = {
-                        bottom: "28%",
                         backgroundColor: 'rgba(255 , 255, 255, 0)',
                         xAxis: {
                             type: 'category',
