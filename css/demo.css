@@ -316,14 +316,12 @@ body {
 }
 .pie-charts02 {
   height: 100%;
-  margin-top: 1.125rem;
   display: flex;
-  justify-content: space-around;
-  padding: 0 0.4375rem;
+  justify-content: center;
+  padding: 1.75rem 1.5625rem 0 0.9375rem;
   box-sizing: border-box;
 }
 .pie-charts02 .box {
-  margin-top: 0.0625rem;
   width: 12.25rem;
   height: 12.25rem;
 }
