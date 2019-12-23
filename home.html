@@ -667,7 +667,7 @@
                             right: '20%',
                             data: dataMock,
                             padding: [0, 2],
-                            itemWidth: 8,
+                            itemWidth: this.fontSize(0.14),
                             formatter: function (name, value) {
                                 return "{title|" + name + "}     {value|" + (_this.arrayObj(dataMock,
                                     "name")[name].value) + "}"
@@ -787,7 +787,7 @@
                             right: '20%',
                             data: dataMock,
                             padding: [0, 2],
-                            itemWidth: 8,
+                            itemWidth: this.fontSize(0.14),
                             formatter: function (name, value) {
                                 return "{title|" + name + "}     {value|" + (_this.arrayObj(dataMock,
                                     "name")[name].value) + "}"
@@ -1408,7 +1408,7 @@
                                 color: '#27DBF3',
                                 fontSize: this.fontSize(0.14),
                             },
-                            itemWidth: 8, // 圆圈的宽
+                            itemWidth: this.fontSize(0.14), // 圆圈的宽
                             formatter: function (name) {
                                 return "{title|" + name + "}     {value|" + (_this.arrayObj(funnelData,
                                     "name")[name].value) + "}"
@@ -1512,7 +1512,7 @@
                                 color: '#27DBF3',
                                 fontSize: this.fontSize(0.14),
                             },
-                            itemWidth: 8, // 圆圈的宽
+                            itemWidth: this.fontSize(0.14), // 8
                             formatter: function (name) {
                                 return "{title|" + name + "}     {value|" + (_this.arrayObj(funnelData,
                                     "name")[name].value) + "}"
@@ -1916,6 +1916,7 @@
                         itemName.push(item.name);
                     });
                     var barOption = {
+                        bottom: "28%",
                         backgroundColor: 'rgba(255 , 255, 255, 0)',
                         xAxis: {
                             type: 'category',
@@ -1931,7 +1932,7 @@
                                     fontSize: this.fontSize(.13),
                                     color: '#fff',
                                 },
-                                margin: 20, // 刻度标签与轴线之间的距离。
+                                margin: this.fontSize(.24), // 刻度标签与轴线之间的距离。
                             },
                             label: {
                                 show: true,
@@ -1958,8 +1959,8 @@
                         series: [{
                                 // name: '上面圆',
                                 type: 'pictorialBar',
-                                symbolSize: [30, 15],
-                                symbolOffset: [0, -8],
+                                symbolSize: [this.fontSize(.45), this.fontSize(.24)],
+                                symbolOffset: [0, -this.fontSize(.1)],
                                 z: 5,
                                 itemStyle: {
                                     normal: {
@@ -1970,7 +1971,8 @@
                                     normal: {
                                         show: true,
                                         position: 'top',
-                                        color: '#fff'
+                                        color: '#fff',
+                                        fontSize: this.fontSize(.18),
                                     }
                                 },
                                 symbolPosition: 'end',
@@ -1979,8 +1981,8 @@
                             {
                                 // name: '下面圆',
                                 type: 'pictorialBar',
-                                symbolSize: [30, 15],
-                                symbolOffset: [0, 8],
+                                symbolSize: [this.fontSize(.45), this.fontSize(.24)],
+                                symbolOffset: [0, this.fontSize(.1)],
                                 z: 1,
                                 itemStyle: {
                                     normal: {
@@ -2009,7 +2011,7 @@
                                     }
                                 },
                                 silent: true,
-                                barWidth: 30,
+                                barWidth: this.fontSize(.45),
                                 barGap: '-100%', // Make series be overlap
                                 data: data
                             }
@@ -2042,6 +2044,7 @@
                         itemName.push(item.name);
                     });
                     var barOption = {
+                        bottom: "28%",
                         backgroundColor: 'rgba(255 , 255, 255, 0)',
                         xAxis: {
                             type: 'category',
@@ -2054,10 +2057,10 @@
                             axisLabel: {
                                 show: true,
                                 textStyle: {
-                                    fontSize: this.fontSize(.14),
+                                    fontSize: this.fontSize(.13),
                                     color: '#fff',
                                 },
-                                margin: 20, // 刻度标签与轴线之间的距离。
+                                margin: this.fontSize(.24), // 刻度标签与轴线之间的距离。
                             },
                             label: {
                                 show: true,
@@ -2084,8 +2087,8 @@
                         series: [{
                                 // name: '上面圆',
                                 type: 'pictorialBar',
-                                symbolSize: [30, 15],
-                                symbolOffset: [0, -8],
+                                symbolSize: [this.fontSize(.45), this.fontSize(.24)],
+                                symbolOffset: [0, -this.fontSize(.1)],
                                 z: 5,
                                 itemStyle: {
                                     normal: {
@@ -2096,7 +2099,8 @@
                                     normal: {
                                         show: true,
                                         position: 'top',
-                                        color: '#fff'
+                                        color: '#fff',
+                                        fontSize: this.fontSize(.18),
                                     }
                                 },
                                 symbolPosition: 'end',
@@ -2105,8 +2109,8 @@
                             {
                                 // name: '下面圆',
                                 type: 'pictorialBar',
-                                symbolSize: [30, 15],
-                                symbolOffset: [0, 8],
+                                symbolSize: [this.fontSize(.45), this.fontSize(.24)],
+                                symbolOffset: [0, this.fontSize(.1)],
                                 z: 1,
                                 itemStyle: {
                                     normal: {
@@ -2135,7 +2139,7 @@
                                     }
                                 },
                                 silent: true,
-                                barWidth: 30,
+                                barWidth: this.fontSize(.45),
                                 barGap: '-100%', // Make series be overlap
                                 data: data
                             }
