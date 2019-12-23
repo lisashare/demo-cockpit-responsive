@@ -261,7 +261,7 @@ body {
   position: absolute;
   top: 10%;
   left: 15%;
-  width: 10rem;
+  min-width: 9.375rem;
   border: 1px solid #27dbf2;
   background: transparent;
   box-sizing: border-box;
@@ -277,6 +277,7 @@ body {
   height: 1.875rem;
   line-height: 1.875rem;
   font-size: 0.875rem;
+  padding: 0 0.3125rem;
 }
 .box-center .sign-circle i,
 .box-center .visit-circle i {
