@@ -2248,7 +2248,7 @@
                         console.log('res', res);
                         for (let i = 0; i < res.length; i++) {
                             var json = res[i];
-                            if (json.fromchan == 2) {
+                            if (json.fromchan == 1) {
                                 _this.xiaowuzhong = json;
                                 _this.count4.update(_this.xiaowuzhong.daytotalsignamount);
                                 _this.count5.update(_this.xiaowuzhong.daytotalsignsingleamount);
@@ -2303,8 +2303,7 @@
                                     json.dayaccountconsumer, json.dayclewconversation);
                             }
 
-                            } else if (json.fromchan == 1) {
-                                // console.log(Number(json.daytotalsignamount))
+                            } else if (json.fromchan == 2) {
                                 _this.shangjihezi = json;
                                 _this.count1.update(_this.shangjihezi.daytotalsignamount);
                                 _this.count2.update(_this.shangjihezi.daytotalsignsingleamount);
