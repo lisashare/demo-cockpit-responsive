@@ -7,8 +7,6 @@
         content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,width=device-width">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>快道集团驾驶舱</title>
-    <!-- <script src="js/rem.js"></script> -->
-    
     <link rel="stylesheet" href="https://static.kuaidao.cn/qingteng/wx-css/reset_new.css">
     <link rel="stylesheet" href="./css/demo.css">
     <link rel="stylesheet" href="https://static.kuaidao.cn/qingteng/wx-css/swiper.min.css">
@@ -664,7 +662,7 @@
                             align: 'left',
                             icon: "circle",
                             top: "center",
-                            right: '20%',
+                            right: '21%',
                             data: dataMock,
                             padding: [0, 2],
                             itemWidth: this.fontSize(0.1),
@@ -693,7 +691,7 @@
                                 type: 'pie',
                                 clockWise: false,
                                 radius: item.radiusArr,
-                                center: ['30%', '50%'],
+                                center: ['32%', '50%'],
                                 itemStyle: dataStyle,
                                 hoverAnimation: false,
                                 startAngle: 90,
@@ -784,7 +782,7 @@
                             align: 'left',
                             icon: "circle",
                             top: "center",
-                            right: '20%',
+                            right: '21%',
                             data: dataMock,
                             padding: [0, 2],
                             itemWidth: this.fontSize(0.1),
@@ -813,7 +811,7 @@
                                 type: 'pie',
                                 clockWise: false,
                                 radius: item.radiusArr,
-                                center: ['30%', '50%'],
+                                center: ['32%', '50%'],
                                 itemStyle: dataStyle,
                                 hoverAnimation: false,
                                 startAngle: 90,
@@ -1403,7 +1401,7 @@
                             orient: 'vertical',
                             icon: "circle",
                             top: "center",
-                            right: '14%',
+                            right: '16%',
                             textStyle: {
                                 color: '#27DBF3',
                                 fontSize: this.fontSize(0.14),
@@ -1432,7 +1430,7 @@
                             // name:'鼠标移入提示',
                             type: 'funnel',
                             left: '10%',
-                            top: "12%",
+                            top: "16%",
                             width: '45%',
                             height: '75%',
                             sort: 'descending',
@@ -1921,7 +1919,6 @@
                             containLabel:true,
                             bottom:'10%'
                         },
-
                         xAxis: {
                             type: 'category',
                             axisTick: {
@@ -2048,7 +2045,10 @@
                         itemName.push(item.name);
                     });
                     var barOption = {
-                        bottom: "28%",
+                        grid:{
+                            containLabel:true,
+                            bottom:'10%'
+                        },
                         backgroundColor: 'rgba(255 , 255, 255, 0)',
                         xAxis: {
                             type: 'category',
@@ -2151,17 +2151,7 @@
                     };
                     this.xwzEcharts.barCharts.setOption(barOption);
                 },
-                //参数container为图表盒子节点.charts为图表节点
-                chartssize(charts, container) {
-                    if (!container) {
-                        container = charts.parent(".box");
-                    }
-                    var wi = container.width();
-                    var hi = container.height();
-                    charts.width(wi)
-                    charts.height(hi)
-                },
-                chartssize2() {
+                chartssize() {
                     var oele = $(".charts");
                     for (var i = 0;i<oele.length;i++) {
                         var container = $(oele[i]).parent(".box");
@@ -2185,8 +2175,8 @@
                         // },
                         speed: 1000,
                         // loop: false,
-                        autoplay: 20000,
-                        onSlideChangeStart: function () {
+                        autoplay: 300000,
+                        onSlideChangeStart: function (param) {
                             var index = mainVM.mySwiper.activeIndex;
                             $('.nav-tab li').removeClass('active').eq(index).addClass('active');
                         }
@@ -2379,10 +2369,10 @@
                     };
                     this.count1 = new CountUp('number_1', 0, 0, 0, 1.5, options);
                     this.count2 = new CountUp('number_2', 0, 0, 0, 1.5, options);
-                    this.count3 = new CountUp('number_3', 0, 0, 2, 1.5, options);
+                    this.count3 = new CountUp('number_3', 0, 0, 0, 1.5, options);
                     this.count4 = new CountUp('number_4', 0, 0, 0, 1.5, options);
                     this.count5 = new CountUp('number_5', 0, 0, 0, 1.5, options);
-                    this.count6 = new CountUp('number_6', 0, 0, 2, 1.5, options);
+                    this.count6 = new CountUp('number_6', 0, 0, 0, 1.5, options);
                     // if (!this.count1.error) {
                     //     this.count1.start();
                     // } else {
@@ -2403,16 +2393,14 @@
             mounted() {
                 document.getElementById('wrapper').style.display = 'block';
 
-                this.chartssize2()
-
-                this.getJson()
+                this.chartssize();
+                this.getJson();
                 this.initSwiper();
-                this.countScroll()
-
+                this.countScroll();
 
                 /* 响应式 */
                 window.onresize = function () {
-                    mainVM.chartssize2();
+                    mainVM.chartssize();
                     mainVM.mapCharts.resize();
                     mainVM.mapCharts2.resize();
                     mainVM.sjEcharts.funnelCharts.resize();
@@ -2430,10 +2418,9 @@
                     mainVM.xwzEcharts.myChartStatistics.resize()
                     
                 }
-
                 setInterval(()=>{ // 整体数据请求;
                     this.getJson(2)
-                }, 18000)
+                }, 30000)
             },
             created() {
                 var day = new Date(); // 当前月份
@@ -2446,5 +2433,4 @@
         })
     </script>
 </body>
-
 </html>
