@@ -711,7 +711,7 @@
                                         }
                                     },
                                     {
-                                        value: item.total - item.value <= 0 ?item.value:item.total,
+                                        value: Number(item.total) - Number(item.value) <= 0 ?item.value:item.total,
                                         name: '',
                                         tooltip: {
                                             show: false
@@ -831,7 +831,7 @@
                                         }
                                     },
                                     {
-                                        value: item.total - item.value <= 0 ?item.value:item.total,
+                                        value: Number(item.total) - Number(item.value) <= 0 ?item.value:item.total,
                                         name: '',
                                         tooltip: {
                                             show: false
