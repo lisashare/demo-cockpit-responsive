@@ -2195,9 +2195,11 @@
                         // loop: false,
                         autoplay: 300000,
                         autoplayDisableOnInteraction: false,
-                        onSlideChangeStart: function (param) {
+                        onTransitionEnd: function (param) {
+                            // console.log('下标',mainVM.mySwiper.activeIndex)
                             var index = mainVM.mySwiper.activeIndex;
                             $('.nav-tab li').removeClass('active').eq(index).addClass('active');
+                        
                         }
                     });
                 },
