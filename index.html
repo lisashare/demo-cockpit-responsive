@@ -1566,6 +1566,7 @@
                 },
                 // 地图
                 initMap(parameter, type) {
+                    this.mapCharts.clear();
                     var planePath =
                         'path://M.6,1318.313v-89.254l-319.9-221.799l0.073-208.063c0.521-84.662-26.629-121.796-63.961-121.491c-37.332-0.305-64.482,36.829-63.961,121.491l0.073,208.063l-319.9,221.799v89.254l330.343-157.288l12.238,241.308l-134.449,92.931l0.531,42.034l175.125-42.917l175.125,42.917l0.531-42.034l-134.449-92.931l12.238-241.308L1705';
                     var convertData = function (data) {
@@ -1577,13 +1578,13 @@
                             var dataItem = data[i];
                             var fromCoord = '';
                             var toCoord = '';
-                            if (type) {
-                                fromCoord = geoCoordMap[dataItem[0].name];
-                                toCoord = geoCoordMap[dataItem[1].name];
-                            } else {
+                            // if (type) {
+                            //     fromCoord = geoCoordMap[dataItem[0].name];
+                            //     toCoord = geoCoordMap[dataItem[1].name];
+                            // } else {
                                 fromCoord = geoCoordMap[dataItem[1].name];
                                 toCoord = geoCoordMap[dataItem[0].name];
-                            }
+                            // }
                             if (fromCoord && toCoord) {
                                 res.push([{
                                     coord: fromCoord
@@ -1678,9 +1679,9 @@
                                 },
                                 data: item[1].map(function (dataItem) {
                                     return {
-                                        name: dataItem[1].name,
-                                        value: geoCoordMap[dataItem[1].name].concat([
-                                            dataItem[1].value
+                                        name: dataItem[0].name,
+                                        value: geoCoordMap[dataItem[0].name].concat([
+                                            dataItem[0].value
                                         ])
                                     };
                                 })
@@ -1733,6 +1734,7 @@
                     this.mapCharts.setOption(mapOption);
                 },
                 initMap2(parameter2, type) {
+                    this.mapCharts2.clear();
                     var planePath =
                         'path://M.6,1318.313v-89.254l-319.9-221.799l0.073-208.063c0.521-84.662-26.629-121.796-63.961-121.491c-37.332-0.305-64.482,36.829-63.961,121.491l0.073,208.063l-319.9,221.799v89.254l330.343-157.288l12.238,241.308l-134.449,92.931l0.531,42.034l175.125-42.917l175.125,42.917l0.531-42.034l-134.449-92.931l12.238-241.308L1705';
                     var convertData = function (data) {
@@ -1744,13 +1746,13 @@
                             var dataItem = data[i];
                             var fromCoord = '';
                             var toCoord = '';
-                            if (type) {
-                                fromCoord = geoCoordMap[dataItem[0].name];
-                                toCoord = geoCoordMap[dataItem[1].name];
-                            } else {
+                            // if (type) {
+                            //     fromCoord = geoCoordMap[dataItem[0].name];
+                            //     toCoord = geoCoordMap[dataItem[1].name];
+                            // } else {
                                 fromCoord = geoCoordMap[dataItem[1].name];
                                 toCoord = geoCoordMap[dataItem[0].name];
-                            }
+                            // }
                             if (fromCoord && toCoord) {
                                 res.push([{
                                     coord: fromCoord
@@ -1843,9 +1845,9 @@
                                 },
                                 data: item[1].map(function (dataItem) {
                                     return {
-                                        name: dataItem[1].name,
-                                        value: geoCoordMap[dataItem[1].name].concat([
-                                            dataItem[1].value
+                                        name: dataItem[0].name,
+                                        value: geoCoordMap[dataItem[0].name].concat([
+                                            dataItem[0].value
                                         ])
                                     };
                                 })
@@ -2266,13 +2268,13 @@
                                     .mapsignamount);
                                 _this.xwzEcharts.visitData = _this.groupArr2(_this.xiaowuzhong
                                     .mapcomevisitamount);
-
+                                _this.arr2 = [_this.xwzEcharts.signData, _this.xwzEcharts.visitData];
+                                _this.initMap2(_this.arr2[_this.num2], _this.num2);
                                 _this.mapTimer2 = setInterval(() => {
                                     _this.num2 = _this.num2 ? --_this.num2 : ++_this.num2;
                                     _this.initMap2(_this.arr2[_this.num2], _this.num2);
-                                }, 8000)
-                                _this.arr2 = [_this.xwzEcharts.signData, _this.xwzEcharts.visitData];
-                                _this.initMap2(_this.arr2[_this.num2], _this.num2);
+                                }, 10000)
+                               
                                 // 地图 end
                             if(type){
                                 setTimeout(()=>{
@@ -2319,13 +2321,13 @@
                                 clearInterval(_this.mapTimer);
                                 _this.sjEcharts.signData = _this.groupArr2(_this.shangjihezi.mapsignamount);
                                 _this.sjEcharts.visitData = _this.groupArr2(_this.shangjihezi.mapcomevisitamount);
+                                _this.arr = [_this.sjEcharts.signData, _this.sjEcharts.visitData];
+                                _this.initMap(_this.arr[_this.num], _this.num);
                                 _this.mapTimer = setInterval(() => {
                                     _this.num = _this.num ? --_this.num : ++_this.num;
                                     _this.initMap(_this.arr[_this.num], _this.num);
-                                }, 8000)
-
-                                _this.arr = [_this.sjEcharts.signData, _this.sjEcharts.visitData];
-                                _this.initMap(_this.arr[_this.num], _this.num);
+                                }, 10000)
+                               
                                 // 地图 end
                                 if(type){
                                     setTimeout(()=>{
