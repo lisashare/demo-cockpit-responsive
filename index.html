@@ -365,7 +365,6 @@
                 },
                 //商务统计 
                 initEchartsByStatistics(daySign, dayCome, daySignSingle, daySignPrice, totalData) {
-                  
                     // totalDayComeAmount: "10000", // 日来访量
                     // totalDaySignAmount: "10000", // 日签约量
                     // totalDaySignSingleAmount: "10000", // 日签约单量
@@ -380,7 +379,7 @@
                         // },
                         radar: {
                             shape: 'circle',
-                            radius: '75%',
+                            radius: '70%',
                             center: ['50%', '50%'],
                             startAngle: 45,
                             // splitNumber: 4,
@@ -398,7 +397,7 @@
                                 rich: {
                                     a: {
                                         color: '#fff',
-                                        fontSize: this.fontSize(0.14),
+                                        fontSize: this.fontSize(0.12),
                                         align: 'center'
                                     },
                                     b: {
@@ -484,14 +483,13 @@
                 },
                 //商务统计 2
                 initEchartsByStatistics2(daySign, dayCome, daySignSingle, daySignPrice, totalData) {
-                    
                     this.xwzEcharts.myChartStatistics = echarts.init(document.getElementById(
                         'echarts_statistics2'));
                     this.xwzEcharts.myChartStatistics.clear()
                     option = {
                         radar: {
                             shape: 'circle',
-                            radius: '75%',
+                            radius: '70%',
                             center: ['50%', '48%'],
                             startAngle: 45,
                             // splitNumber: 4,
@@ -509,7 +507,7 @@
                                 rich: {
                                     a: {
                                         color: '#fff',
-                                        fontSize: this.fontSize(0.14),
+                                        fontSize: this.fontSize(0.12),
                                         align: 'center'
                                     },
                                     b: {
@@ -607,7 +605,7 @@
                     var dataMock = [{
                             name: "资源量",
                             value: resource,
-                            radiusArr: ['73.5%', '85%'],
+                            radiusArr: ['63.5%', '75%'],
                             color: '#1b6bee',
                             total: totalNum.totalDayResourceAmount
 
@@ -615,18 +613,17 @@
                         {
                             name: "邀约量",
                             value: invitation,
-                            radiusArr: ['53.5%', '65%'],
+                            radiusArr: ['43.5%', '55%'],
                             color: '#1bb7c4',
                             total: totalNum.totalDayInvitationAmount
                         },
                         {
                             name: "通话量",
                             value: call,
-                            radiusArr: ['33.5%', '45%'],
+                            radiusArr: ['23.5%', '35%'],
                             color: '#e530a3',
                             total: totalNum.totalDayCallAmount
-                        },
-
+                        }
                     ]
                     var dataName = []
                     this.sjEcharts.myChartTmk = echarts.init(document.getElementById('echarts_tmk'));
@@ -668,7 +665,7 @@
                             right: '21%',
                             data: dataMock,
                             padding: [0, 2],
-                            itemWidth: this.fontSize(0.1),
+                            itemWidth: this.fontSize(0.08),
                             formatter: function (name, value) {
                                 return "{title|" + name + "}     {value|" + (_this.arrayObj(dataMock,
                                     "name")[name].value) + "}"
@@ -677,7 +674,7 @@
                             textStyle: {
                                 rich: {
                                     title: {
-                                        fontSize: this.fontSize(0.14),
+                                        fontSize: this.fontSize(0.12),
                                         // lineHeight: 15,
                                         color: "rgb(255, 255, 255)"
                                     },
@@ -727,7 +724,7 @@
                     var dataMock = [{
                             name: "资源量",
                             value: resource,
-                            radiusArr: ['73.5%', '85%'],
+                            radiusArr: ['63.5%', '75%'],
                             color: '#1b6bee',
                             total: totalNum.totalDayResourceAmount
 
@@ -735,18 +732,17 @@
                         {
                             name: "邀约量",
                             value: invitation,
-                            radiusArr: ['53.5%', '65%'],
+                            radiusArr: ['43.5%', '55%'],
                             color: '#1bb7c4',
                             total: totalNum.totalDayInvitationAmount
                         },
                         {
                             name: "通话量",
                             value: call,
-                            radiusArr: ['33.5%', '45%'],
+                            radiusArr: ['23.5%', '35%'],
                             color: '#e530a3',
                             total: totalNum.totalDayCallAmount
-                        },
-
+                        }
                     ]
                     var dataName = []
                     this.xwzEcharts.myChartTmk = echarts.init(document.getElementById('echarts_tmk2'));
@@ -788,7 +784,7 @@
                             right: '21%',
                             data: dataMock,
                             padding: [0, 2],
-                            itemWidth: this.fontSize(0.1),
+                            itemWidth: this.fontSize(0.08),
                             formatter: function (name, value) {
                                 return "{title|" + name + "}     {value|" + (_this.arrayObj(dataMock,
                                     "name")[name].value) + "}"
@@ -797,7 +793,7 @@
                             textStyle: {
                                 rich: {
                                     title: {
-                                        fontSize: this.fontSize(0.14),
+                                        fontSize: this.fontSize(0.12),
                                         // lineHeight: 15,
                                         color: "rgb(255, 255, 255)"
                                     },
@@ -841,7 +837,6 @@
                     };
                     this.xwzEcharts.myChartTmk.setOption(option);
                 },
-
                 //商务累计1
                 initEchartsByBusinessOne(jsonData, totalNum) {
                     this.sjEcharts.myChartOne = echarts.init(document.getElementById('echarts_business1'));
@@ -944,7 +939,7 @@
                                 y: 'top',
                                 textStyle: {
                                     color: '#fff',
-                                    fontSize: this.fontSize(.14),
+                                    fontSize: this.fontSize(.12),
                                     fontWeight: 'normal'
                                 },
                             }
@@ -1065,7 +1060,7 @@
                                 y: 'top',
                                 textStyle: {
                                     color: '#fff',
-                                    fontSize: this.fontSize(.14),
+                                    fontSize: this.fontSize(.12),
                                     fontWeight: 'normal'
                                 },
                             }
@@ -1187,7 +1182,7 @@
                                     rich: {
                                         a: {
                                             color: '#ffffff',
-                                            fontSize: this.fontSize(.14),
+                                            fontSize: this.fontSize(.12),
                                         },
                                         b: {
                                             color: '#fff',
@@ -1326,7 +1321,7 @@
                                     rich: {
                                         a: {
                                             color: '#ffffff',
-                                            fontSize: this.fontSize(.14),
+                                            fontSize: this.fontSize(.12),
                                         },
                                         b: {
                                             color: '#fff',
@@ -1404,12 +1399,12 @@
                             orient: 'vertical',
                             icon: "circle",
                             top: "center",
-                            right: '16%',
+                            right: '20%',
                             textStyle: {
                                 color: '#27DBF3',
-                                fontSize: this.fontSize(0.14),
+                                fontSize: this.fontSize(0.13),
                             },
-                            itemWidth: this.fontSize(0.1), // 圆圈的宽
+                            itemWidth: this.fontSize(0.08), // 圆圈的宽
                             formatter: function (name) {
                                 return "{title|" + name + "}     {value|" + (_this.arrayObj(funnelData,
                                     "name")[name].value) + "}"
@@ -1419,7 +1414,7 @@
                         textStyle: {
                             rich: {
                                 title: {
-                                    fontSize: this.fontSize(0.14),
+                                    fontSize: this.fontSize(0.12),
                                     color: "rgb(255, 255, 255)"
                                 },
                                 value: {
@@ -1508,12 +1503,12 @@
                             orient: 'vertical',
                             icon: "circle",
                             top: "center",
-                            right: '14%',
+                            right: '20%',
                             textStyle: {
                                 color: '#27DBF3',
-                                fontSize: this.fontSize(0.14),
+                                fontSize: this.fontSize(0.13),
                             },
-                            itemWidth: this.fontSize(0.1), // 8
+                            itemWidth: this.fontSize(0.08), // 8
                             formatter: function (name) {
                                 return "{title|" + name + "}     {value|" + (_this.arrayObj(funnelData,
                                     "name")[name].value) + "}"
@@ -1523,7 +1518,7 @@
                         textStyle: {
                             rich: {
                                 title: {
-                                    fontSize: this.fontSize(0.14),
+                                    fontSize: this.fontSize(0.12),
                                     color: "rgb(255, 255, 255)"
                                 },
                                 value: {
@@ -1935,7 +1930,7 @@
                             axisLabel: {
                                 show: true,
                                 textStyle: {
-                                    fontSize: this.fontSize(.13),
+                                    fontSize: this.fontSize(.12),
                                     color: '#fff',
                                 },
                                 margin: this.fontSize(.24), // 刻度标签与轴线之间的距离。
@@ -1978,7 +1973,7 @@
                                         show: true,
                                         position: 'top',
                                         color: '#fff',
-                                        fontSize: this.fontSize(.18),
+                                        fontSize: this.fontSize(.14),
                                     }
                                 },
                                 symbolPosition: 'end',
@@ -2066,7 +2061,7 @@
                             axisLabel: {
                                 show: true,
                                 textStyle: {
-                                    fontSize: this.fontSize(.13),
+                                    fontSize: this.fontSize(.12),
                                     color: '#fff',
                                 },
                                 margin: this.fontSize(.24), // 刻度标签与轴线之间的距离。
@@ -2109,7 +2104,7 @@
                                         show: true,
                                         position: 'top',
                                         color: '#fff',
-                                        fontSize: this.fontSize(.18),
+                                        fontSize: this.fontSize(.14),
                                     }
                                 },
                                 symbolPosition: 'end',

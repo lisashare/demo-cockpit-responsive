@@ -150,6 +150,7 @@ body {
 .gauge div {
   font-size: 0.875rem;
   color: #fff;
+  transform: scale(0.9);
 }
 .gauge p {
   line-height: 3.75rem;
@@ -282,8 +283,8 @@ body {
 .box-center .visit-circle i {
   display: inline-block;
   vertical-align: middle;
-  width: 0.625rem;
-  height: 0.625rem;
+  width: 0.5rem;
+  height: 0.5rem;
   background: #fae07f;
   border-radius: 50%;
   margin-right: 0.3125rem;
