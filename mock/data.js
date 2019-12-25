@@ -15,10 +15,10 @@
 		"daysignamount": "2", // 日签约量
 		"daysignsingleamount": "2", // 日签约单量
 		"daysignprice": "10200.00", // 日签约金额
-		"dayserviceonlinenum": "", //  日客服在线量
-		"dayconverastionamount": "", // 日会话总量
-		"dayaccountconsumer": "", // 日账户消费
-		"dayclewconversation": "", // 日线索会话
+		"dayserviceonlinenum": "10000", //  日客服在线量
+		"dayconverastionamount": "2", // 日会话总量
+		"dayaccountconsumer": "2", // 日账户消费
+		"dayclewconversation": "2", // 日线索会话
 		"daytotalsignsingleamount": "", // 日签约单量 (中)
 		"daytotalsignamount": "", // 日签约量(中)
 		"daytotalsignprice": "", // 日签约金额(中)
@@ -40,10 +40,10 @@
 		"daysignamount": "1000",
 		"daysignsingleamount": "1000",
 		"daysignprice": "1000.00",
-		"dayserviceonlinenum": "",
-		"dayconverastionamount": "",
-		"dayaccountconsumer": "",
-		"dayclewconversation": "",
+		"dayserviceonlinenum": "10000",
+		"dayconverastionamount": "2",
+		"dayaccountconsumer": "2",
+		"dayclewconversation": "2",
 		"daytotalsignsingleamount": "",
 		"daytotalsignamount": "",
 		"daytotalsignprice": "",
