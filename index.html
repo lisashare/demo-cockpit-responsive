@@ -1579,11 +1579,11 @@
                             var fromCoord = '';
                             var toCoord = '';
                             // if (type) {
-                            //     fromCoord = geoCoordMap[dataItem[0].name];
-                            //     toCoord = geoCoordMap[dataItem[1].name];
+                                fromCoord = geoCoordMap[dataItem[0].name];
+                                toCoord = geoCoordMap[dataItem[1].name];
                             // } else {
-                                fromCoord = geoCoordMap[dataItem[1].name];
-                                toCoord = geoCoordMap[dataItem[0].name];
+                                // fromCoord = geoCoordMap[dataItem[1].name];
+                                // toCoord = geoCoordMap[dataItem[0].name];
                             // }
                             if (fromCoord && toCoord) {
                                 res.push([{
@@ -1747,11 +1747,11 @@
                             var fromCoord = '';
                             var toCoord = '';
                             // if (type) {
-                            //     fromCoord = geoCoordMap[dataItem[0].name];
-                            //     toCoord = geoCoordMap[dataItem[1].name];
+                                fromCoord = geoCoordMap[dataItem[0].name];
+                                toCoord = geoCoordMap[dataItem[1].name];
                             // } else {
-                                fromCoord = geoCoordMap[dataItem[1].name];
-                                toCoord = geoCoordMap[dataItem[0].name];
+                                // fromCoord = geoCoordMap[dataItem[1].name];
+                                // toCoord = geoCoordMap[dataItem[0].name];
                             // }
                             if (fromCoord && toCoord) {
                                 res.push([{
@@ -1969,7 +1969,7 @@
                                 // name: '上面圆',
                                 type: 'pictorialBar',
                                 symbolSize: [this.fontSize(.45), this.fontSize(.24)],
-                                symbolOffset: [0, -this.fontSize(.1)],
+                                symbolOffset: [0, -this.fontSize(.14)],
                                 z: 5,
                                 itemStyle: {
                                     normal: {
@@ -2100,7 +2100,7 @@
                                 // name: '上面圆',
                                 type: 'pictorialBar',
                                 symbolSize: [this.fontSize(.45), this.fontSize(.24)],
-                                symbolOffset: [0, -this.fontSize(.1)],
+                                symbolOffset: [0, -this.fontSize(.14)],
                                 z: 5,
                                 itemStyle: {
                                     normal: {
@@ -2184,6 +2184,7 @@
                         speed: 1000,
                         // loop: false,
                         autoplay: 300000,
+                        autoplayDisableOnInteraction: false,
                         onSlideChangeStart: function (param) {
                             var index = mainVM.mySwiper.activeIndex;
                             $('.nav-tab li').removeClass('active').eq(index).addClass('active');
