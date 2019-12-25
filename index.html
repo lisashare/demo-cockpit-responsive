@@ -1429,18 +1429,27 @@
                             type: 'funnel',
                             left: '10%',
                             top: "16%",
-                            width: '45%',
+                            width: '40%',
                             height: '75%',
                             sort: 'descending',
-                            gap: 6, // 间隙
+                            gap: 5, // 间隙
                             label: {
                                 normal: { // 内部显示
-                                    position: 'inside',
+                                    show: false,
+                                    // position: 'inside',
                                     formatter: '{d}%',
                                     textStyle: {
-                                        color: '#fff'
+                                        color: '#fff',
+                                        fontSize: this.fontSize(0.14),
                                     }
                                 },
+                            },
+                            labelLine: {
+                                length: this.fontSize(0.1),
+                                lineStyle: {
+                                    width: 1,
+                                    type: 'solid'
+                                }
                             },
                             itemStyle: {
                                 normal: {
@@ -1532,19 +1541,28 @@
                             // name:'鼠标移入提示',
                             type: 'funnel',
                             left: '10%',
-                            top: "12%",
-                            width: '45%',
+                            top: "16%",
+                            width: '40%',
                             height: '75%',
                             sort: 'descending',
-                            gap: 6, // 间隙
+                            gap: 5, // 间隙
                             label: {
                                 normal: { // 内部显示
-                                    position: 'inside',
+                                    show: false,
+                                    // position: 'inside',
                                     formatter: '{d}%',
                                     textStyle: {
-                                        color: '#fff'
+                                        color: '#fff',
+                                        fontSize: this.fontSize(0.14),
                                     }
                                 },
+                            },
+                            labelLine: {
+                                length: this.fontSize(0.1),
+                                lineStyle: {
+                                    width: 1,
+                                    type: 'solid'
+                                }
                             },
                             itemStyle: {
                                 normal: {
