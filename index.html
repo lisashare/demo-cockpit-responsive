@@ -2269,9 +2269,9 @@
                             var json = res[i];
                             if (json.fromchan == 1) {
                                 _this.xiaowuzhong = json;
-                                _this.count4.update(_this.xiaowuzhong.daytotalsignamount);
-                                _this.count5.update(_this.xiaowuzhong.daytotalsignsingleamount);
-                                _this.count6.update(_this.xiaowuzhong.daytotalsignprice);
+                                // _this.count4.update(_this.xiaowuzhong.daytotalsignamount);
+                                // _this.count5.update(_this.xiaowuzhong.daytotalsignsingleamount);
+                                // _this.count6.update(_this.xiaowuzhong.daytotalsignprice);
                                 // 地图 start
                                 _this.mapCharts2 = echarts.init(document.getElementById('map-charts2'));
                                 clearInterval(_this.mapTimer2);
@@ -2324,9 +2324,9 @@
 
                             } else if (json.fromchan == 2) {
                                 _this.shangjihezi = json;
-                                _this.count1.update(_this.shangjihezi.daytotalsignamount);
-                                _this.count2.update(_this.shangjihezi.daytotalsignsingleamount);
-                                _this.count3.update(_this.shangjihezi.daytotalsignprice);
+                                // _this.count1.update(_this.shangjihezi.daytotalsignamount);
+                                // _this.count2.update(_this.shangjihezi.daytotalsignsingleamount);
+                                // _this.count3.update(_this.shangjihezi.daytotalsignprice);
                                 // 地图 start
                                 _this.mapCharts = echarts.init(document.getElementById('map-charts'));
                                 clearInterval(_this.mapTimer);
