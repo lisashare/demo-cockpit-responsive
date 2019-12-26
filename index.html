@@ -393,15 +393,6 @@
                     return `<span>${time.getFullYear()}</span>年<span>${time.getMonth() + 1 >= 10 ? (time.getMonth() + 1) : '0' + (time.getMonth() + 1)}</span>月<span>${time.getDate() >= 10 ? time.getDate() : '0' + time.getDate()}</span>日 &nbsp;&nbsp;&nbsp;&nbsp;
                             <span>${time.getHours() >= 10 ? time.getHours() : '0' + time.getHours()}</span><i> : </i><span>${time.getMinutes()>=10?time.getMinutes():'0'+time.getMinutes()}</span><i> : </i><span>${time.getSeconds() >= 10 ? time.getSeconds() : '0' + time.getSeconds()}</span>`;
                 },
-                slide(i) {
-                    if(i == this.index){
-                        return;
-                    }else{
-                        this.index = i;
-                        // $('.nav-tab li').removeClass('active').eq(i).addClass('active');
-                        this.mySwiper.slideTo(i, 300, false);
-                    }
-                },
                 //商务统计 
                 initEchartsByStatistics(daySign, dayCome, daySignSingle, daySignPrice, totalData) {
                     // totalDayComeAmount: "10000", // 日来访量
@@ -412,10 +403,6 @@
                         'echarts_statistics'));
                     this.sjEcharts.myChartStatistics.clear()
                     option = {
-                        // grid:{
-                        //     containLabel:true,
-                        //     top:'20%'
-                        // },
                         radar: {
                             shape: 'circle',
                             radius: '70%',
@@ -2218,6 +2205,15 @@
                         $(oele[i]).height(hi)
                     };
                 },
+                slide(i) {
+                    if(i == this.index){
+                        return;
+                    }else{
+                        this.index = i;
+                        // $('.nav-tab li').removeClass('active').eq(i).addClass('active');
+                        this.mySwiper.slideTo(i, 900, false);
+                    }
+                },
                 initSwiper() {
                     this.mySwiper = new Swiper('.swiper-container', {
                         pagination: '.swiper-pagination',
@@ -2231,8 +2227,8 @@
                         //     shadowScale: 0.6
                         // },
                         // loop: true,
-                        // speed: 300,
-                        autoplay: 300000,
+                        speed: 900,
+                        autoplay: 100000,
                         autoplayDisableOnInteraction: false,
                         onSlideChangeStart: function (param) {
                             var index = mainVM.mySwiper.activeIndex;
