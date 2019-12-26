@@ -17,10 +17,10 @@
         <div class="content">
             <div class="cockpit-header">
                 <div class="header-info-left" v-html="time"></div>
-                <h2>快道集团驾驶舱</h2>
+                <h2 @click="handleFullScreen">快道集团驾驶舱</h2>
                 <ul class="header-info-right nav-tab">
-                    <li class="active" @click="slide(0)"><i></i>商机盒子</li>
-                    <li @click="slide(1)">小物种</li>
+                    <li :class="index==0?'active':''" @click="slide(0)"><i></i>商机盒子</li>
+                    <li :class="index==1?'active':''" @click="slide(1)">小物种</li>
                     <li style="color: #5A769F;">广州拓展</li>
                 </ul>
             </div>
@@ -239,6 +239,7 @@
         var mainVM = new Vue({
             el: '#wrapper',
             data: {
+                index: 0,
                 count1: null,
                 count2: null,
                 count3: null,
@@ -305,6 +306,7 @@
                     funnelCharts: null,
                     barCharts: null,
                 },
+                fullscreen: false  // 是否全屏
             },
             filters: {
                 formatNumber(value) {
@@ -327,6 +329,38 @@
                 },
             },
             methods: {
+                // 全屏事件
+                handleFullScreen(){
+                    let element = document.documentElement;
+                    // 判断是否已经是全屏
+                    // 如果是全屏，退出
+                    if (this.fullscreen) {
+                        if (document.exitFullscreen) {
+                            document.exitFullscreen();
+                        } else if (document.webkitCancelFullScreen) {
+                            document.webkitCancelFullScreen();
+                        } else if (document.mozCancelFullScreen) {
+                            document.mozCancelFullScreen();
+                        } else if (document.msExitFullscreen) {
+                            document.msExitFullscreen();
+                        }
+                        console.log('已还原！');
+                    } else {    // 否则，进入全屏
+                        if (element.requestFullscreen) {
+                            element.requestFullscreen();
+                        } else if (element.webkitRequestFullScreen) {
+                            element.webkitRequestFullScreen();
+                        } else if (element.mozRequestFullScreen) {
+                            element.mozRequestFullScreen();
+                        } else if (element.msRequestFullscreen) {
+                            // IE11
+                            element.msRequestFullscreen();
+                        }
+                        console.log('已全屏！');
+                    }
+                    // 改变当前全屏状态
+                    this.fullscreen = !this.fullscreen;
+                },
                 fontSize(res) {
                     let docEl = document.documentElement,
                         clientWidth = window.innerWidth || document.documentElement.clientWidth || document.body
@@ -360,8 +394,13 @@
                             <span>${time.getHours() >= 10 ? time.getHours() : '0' + time.getHours()}</span><i> : </i><span>${time.getMinutes()>=10?time.getMinutes():'0'+time.getMinutes()}</span><i> : </i><span>${time.getSeconds() >= 10 ? time.getSeconds() : '0' + time.getSeconds()}</span>`;
                 },
                 slide(i) {
-                    $('.nav-tab li').removeClass('active').eq(i).addClass('active');
-                    this.mySwiper.slideTo(i, 1000, false);
+                    if(i == this.index){
+                        return;
+                    }else{
+                        this.index = i;
+                        // $('.nav-tab li').removeClass('active').eq(i).addClass('active');
+                        this.mySwiper.slideTo(i, 300, false);
+                    }
                 },
                 //商务统计 
                 initEchartsByStatistics(daySign, dayCome, daySignSingle, daySignPrice, totalData) {
@@ -2184,20 +2223,21 @@
                         pagination: '.swiper-pagination',
                         observer: true,
                         observeParents: true,
-                        effect: 'cube',
+                        // effect: 'cube',
                         // cubeEffect: {
                         //     slideShadows: false,
                         //     shadow: false,
                         //     shadowOffset: 100,
                         //     shadowScale: 0.6
                         // },
-                        speed: 1000,
-                        // loop: false,
+                        // loop: true,
+                        // speed: 300,
                         autoplay: 300000,
                         autoplayDisableOnInteraction: false,
                         onSlideChangeStart: function (param) {
                             var index = mainVM.mySwiper.activeIndex;
-                            $('.nav-tab li').removeClass('active').eq(index).addClass('active');
+                            mainVM.index = index;
+                            // $('.nav-tab li').removeClass('active').eq(index).addClass('active');
                         }
                     });
                 },
@@ -2414,7 +2454,7 @@
                 this.chartssize();
                 this.getJson();
                 this.initSwiper();
-                this.countScroll();
+                // this.countScroll();
 
                 /* 响应式 */
                 window.onresize = function () {
