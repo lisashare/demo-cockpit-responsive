@@ -1443,6 +1443,9 @@
                                 return "{title|" + name + "}     {value|" + (_this.arrayObj(funnelData,
                                     "name")[name].value) + "}"
                             },
+                            selected: {
+                                '资源量': false,
+                            },
                             data: funnelData
                         },
                         textStyle: {
@@ -1555,6 +1558,9 @@
                             formatter: function (name) {
                                 return "{title|" + name + "}     {value|" + (_this.arrayObj(funnelData,
                                     "name")[name].value) + "}"
+                            },
+                            selected: {
+                                '资源量': false,
                             },
                             data: funnelData
                         },
@@ -2328,8 +2334,16 @@
                                 _this.arr2 = [_this.xwzEcharts.signData, _this.xwzEcharts.visitData];
                                 _this.initMap2(_this.arr2[_this.num2], _this.num2);
                                 _this.mapTimer2 = setInterval(() => {
-                                    _this.num2 = _this.num2 ? --_this.num2 : ++_this.num2;
-                                    _this.initMap2(_this.arr2[_this.num2], _this.num2);
+                                    if(_this.num2 == 1){
+                                        _this.num2 = 0;
+                                        _this.initMap2(_this.arr2[0], 0);
+                                    }else if(_this.num2 == 0){
+                                        _this.num2 = 1;
+                                        _this.initMap2(_this.arr2[1], 1);
+                                    }
+                                    // _this.num2 = _this.num2 ? --_this.num2 : ++_this.num2;
+                                    // _this.initMap2(_this.arr2[_this.num2], _this.num2);
+                                    console.log(_this.num2);
                                 }, 10000)
                                
                                 // 地图 end
@@ -2375,14 +2389,22 @@
                                 // _this.count3.update(_this.shangjihezi.daytotalsignprice);
                                 // 地图 start
                                 _this.mapCharts = echarts.init(document.getElementById('map-charts'));
-                                clearInterval(_this.mapTimer);
                                 _this.sjEcharts.signData = _this.groupArr2(_this.shangjihezi.mapsignamount);
                                 _this.sjEcharts.visitData = _this.groupArr2(_this.shangjihezi.mapcomevisitamount);
                                 _this.arr = [_this.sjEcharts.signData, _this.sjEcharts.visitData];
                                 _this.initMap(_this.arr[_this.num], _this.num);
+                                clearInterval(_this.mapTimer);
                                 _this.mapTimer = setInterval(() => {
-                                    _this.num = _this.num ? --_this.num : ++_this.num;
-                                    _this.initMap(_this.arr[_this.num], _this.num);
+                                    if(_this.num == 1){
+                                        _this.num = 0;
+                                        _this.initMap(_this.arr[0], 0);
+                                    }else if(_this.num == 0){
+                                        _this.num = 1;
+                                        _this.initMap(_this.arr[1], 1);
+                                    }
+                                    // _this.num = _this.num ? --_this.num : ++_this.num;
+                                    // _this.initMap(_this.arr[_this.num], _this.num);
+                                    console.log(_this.num);
                                 }, 10000)
                                
                                 // 地图 end
