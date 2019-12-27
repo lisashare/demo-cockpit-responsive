@@ -97,10 +97,10 @@
                                 <div class="center-center">
                                     <div class="map-box box">
                                         <div class="circle-wrap">
-                                            <div :class="['circle-content01', num==0?'act':'']">
+                                            <div :class="['circle-content01', highlight==0?'act':'']">
                                                 <span class="sign-circle"><i></i>签约量<em></em></span>
                                             </div>
-                                            <div :class="['circle-content02', num==1?'act':'']">
+                                            <div :class="['circle-content02', highlight==1?'act':'']">
                                                 <span class="visit-circle"><i></i>来访量<em></em></span>
                                             </div>
                                         </div>
@@ -122,7 +122,7 @@
                                     </div>
                                 </div>
                                 <div class="right-bottom">
-                                    <h3>今日商务统计</h3>
+                                    <h3>七日商务统计</h3>
                                     <div class="box">
                                         <div id="echarts_statistics" class="charts"></div>
                                     </div>
@@ -196,10 +196,10 @@
                                 <div class="center-center">
                                     <div class="map-box box">
                                         <div class="circle-wrap">
-                                            <div :class="['circle-content01', num==0?'act':'']">
+                                            <div :class="['circle-content01', highlight2==0?'act':'']">
                                                 <span class="sign-circle"><i></i>签约量<em></em></span>
                                             </div>
-                                            <div :class="['circle-content02', num==1?'act':'']">
+                                            <div :class="['circle-content02', highlight2==1?'act':'']">
                                                 <span class="visit-circle"><i></i>来访量<em></em></span>
                                             </div>
                                         </div>
@@ -221,7 +221,7 @@
                                     </div>
                                 </div>
                                 <div class="right-bottom">
-                                    <h3>今日商务统计</h3>
+                                    <h3>七日商务统计</h3>
                                     <div class="box">
                                         <div id="echarts_statistics2" class="charts"></div>
                                     </div>
@@ -247,6 +247,8 @@
         var mainVM = new Vue({
             el: '#wrapper',
             data: {
+                highlight: 0,
+                highlight2: 0,
                 index: 0,
                 count1: null,
                 count2: null,
@@ -1649,6 +1651,7 @@
                     if (type) {
                         color = "#fae07f";
                     }
+                    this.highlight = type;
                     var series = [];
                     if(parameter.length){
                         parameter.forEach(function (item, i) {
@@ -1813,10 +1816,11 @@
                         }
                         return res;
                     };
-                    var color = "#27dbf2";
+                    var color = "#27dbf2"; // 蓝色 0
                     if (type) {
-                        color = "#fae07f";
+                        color = "#fae07f"; // 黄色 1
                     }
+                    this.highlight2 = type;
                     var series = [];
                     if(parameter2.length){
                         parameter2.forEach(function (item, i) {
@@ -2331,8 +2335,11 @@
                                     .mapsignamount);
                                 _this.xwzEcharts.visitData = _this.groupArr2(_this.xiaowuzhong
                                     .mapcomevisitamount);
+
                                 _this.arr2 = [_this.xwzEcharts.signData, _this.xwzEcharts.visitData];
+
                                 _this.initMap2(_this.arr2[_this.num2], _this.num2);
+
                                 _this.mapTimer2 = setInterval(() => {
                                     if(_this.num2 == 1){
                                         _this.num2 = 0;
