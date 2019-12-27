@@ -62,7 +62,7 @@
                                 <div class="center-top">
                                     <ul>
                                         <li>
-                                            <div>今日签约量</div>
+                                            <div>七日签约量</div>
                                             <!-- {{shangjihezi.daytotalsignamount?shangjihezi.daytotalsignamount:"0"|formatNumber}} -->
                                             <p class="number" id='number_1'>
                                                 {{shangjihezi.daytotalsignamount?shangjihezi.daytotalsignamount:"0"|formatNumber}}
@@ -73,7 +73,7 @@
                                             <i class="bottomright"></i>
                                         </li>
                                         <li>
-                                            <div>今日签约单量</div>
+                                            <div>七日签约单量</div>
                                             <p class="number" id='number_2'>
                                                 {{shangjihezi.daytotalsignsingleamount?shangjihezi.daytotalsignsingleamount:"0"|formatNumber}}
                                             </p>
@@ -83,7 +83,7 @@
                                             <i class="bottomright"></i>
                                         </li>
                                         <li>
-                                            <div>今日签约金额 <span>(元)</span></div>
+                                            <div>七日签约金额 <span>(元)</span></div>
                                             <p class="number" id='number_3'>
                                                 {{shangjihezi.daytotalsignprice?shangjihezi.daytotalsignprice:"0"|formatNumber}}
                                             </p>
@@ -162,7 +162,7 @@
                                 <div class="center-top">
                                     <ul>
                                         <li>
-                                            <div>今日签约量</div>
+                                            <div>七日签约量</div>
                                             <p class="number" id='number_4'>
                                                 {{xiaowuzhong.daytotalsignamount?xiaowuzhong.daytotalsignamount:"0"|formatNumber}}
                                             </p>
@@ -172,7 +172,7 @@
                                             <i class="bottomright"></i>
                                         </li>
                                         <li>
-                                            <div>今日签约单量</div>
+                                            <div>七日签约单量</div>
                                             <p class="number" id='number_5'>
                                                 {{xiaowuzhong.daytotalsignsingleamount?xiaowuzhong.daytotalsignsingleamount:"0"|formatNumber}}
                                             </p>
@@ -182,7 +182,7 @@
                                             <i class="bottomright"></i>
                                         </li>
                                         <li>
-                                            <div>今日签约金额 <span>(元)</span></div>
+                                            <div>七日签约金额 <span>(元)</span></div>
                                             <p class="number" id='number_6'>
                                                 {{xiaowuzhong.daytotalsignprice?xiaowuzhong.daytotalsignprice:"0"|formatNumber}}
                                             </p>
@@ -652,7 +652,7 @@
                             total: totalNum.totalDayInvitationAmount
                         },
                         {
-                            name: "通话量",
+                            name: "",
                             value: call,
                             radiusArr: ['23.5%', '35%'],
                             color: '#e530a3',
@@ -704,7 +704,7 @@
                                 return "{title|" + name + "}     {value|" + (_this.arrayObj(dataMock,
                                     "name")[name].value) + "}"
                             },
-                            selectedMode:false,
+                            // selectedMode:false,
                             textStyle: {
                                 rich: {
                                     title: {
@@ -771,7 +771,7 @@
                             total: totalNum.totalDayInvitationAmount
                         },
                         {
-                            name: "通话量",
+                            name: "",
                             value: call,
                             radiusArr: ['23.5%', '35%'],
                             color: '#e530a3',
@@ -823,7 +823,7 @@
                                 return "{title|" + name + "}     {value|" + (_this.arrayObj(dataMock,
                                     "name")[name].value) + "}"
                             },
-                            selectedMode:false,
+                            // selectedMode:false,
                             textStyle: {
                                 rich: {
                                     title: {
@@ -2343,7 +2343,6 @@
                                     }
                                     // _this.num2 = _this.num2 ? --_this.num2 : ++_this.num2;
                                     // _this.initMap2(_this.arr2[_this.num2], _this.num2);
-                                    console.log(_this.num2);
                                 }, 10000)
                                
                                 // 地图 end
@@ -2389,11 +2388,11 @@
                                 // _this.count3.update(_this.shangjihezi.daytotalsignprice);
                                 // 地图 start
                                 _this.mapCharts = echarts.init(document.getElementById('map-charts'));
+                                clearInterval(_this.mapTimer);
                                 _this.sjEcharts.signData = _this.groupArr2(_this.shangjihezi.mapsignamount);
                                 _this.sjEcharts.visitData = _this.groupArr2(_this.shangjihezi.mapcomevisitamount);
                                 _this.arr = [_this.sjEcharts.signData, _this.sjEcharts.visitData];
                                 _this.initMap(_this.arr[_this.num], _this.num);
-                                clearInterval(_this.mapTimer);
                                 _this.mapTimer = setInterval(() => {
                                     if(_this.num == 1){
                                         _this.num = 0;
@@ -2404,7 +2403,6 @@
                                     }
                                     // _this.num = _this.num ? --_this.num : ++_this.num;
                                     // _this.initMap(_this.arr[_this.num], _this.num);
-                                    console.log(_this.num);
                                 }, 10000)
                                
                                 // 地图 end
