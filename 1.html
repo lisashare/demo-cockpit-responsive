@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>快道集团驾驶舱</title>
     <link rel="stylesheet" href="https://static.kuaidao.cn/qingteng/wx-css/reset_new.css">
-    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/demo.css">
     <link rel="stylesheet" href="https://static.kuaidao.cn/qingteng/wx-css/swiper.min.css">
 </head>
 
@@ -97,12 +97,8 @@
                                 <div class="center-center">
                                     <div class="map-box box">
                                         <div class="circle-wrap">
-                                            <div :class="['circle-content01', num==0?'act':'']">
-                                                <span class="sign-circle"><i></i>签约量<em></em></span>
-                                            </div>
-                                            <div :class="['circle-content02', num==1?'act':'']">
-                                                <span class="visit-circle"><i></i>来访量<em></em></span>
-                                            </div>
+                                            <span :class="['sign-circle', num==0?'act':'']"><i></i>签约量</span>
+                                            <span :class="['visit-circle', num==1?'act':'']"><i></i>来访量</span>
                                         </div>
                                         <div id="map-charts" class="charts"></div>
                                     </div>
@@ -196,12 +192,8 @@
                                 <div class="center-center">
                                     <div class="map-box box">
                                         <div class="circle-wrap">
-                                            <div :class="['circle-content01', num==0?'act':'']">
-                                                <span class="sign-circle"><i></i>签约量<em></em></span>
-                                            </div>
-                                            <div :class="['circle-content02', num==1?'act':'']">
-                                                <span class="visit-circle"><i></i>来访量<em></em></span>
-                                            </div>
+                                            <span :class="['sign-circle', num2==0?'act':'']"><i></i>签约量</span>
+                                            <span :class="['visit-circle', num2==1?'act':'']"><i></i>来访量</span>
                                         </div>
                                         <div id="map-charts2" class="charts"></div>
                                     </div>
@@ -242,7 +234,7 @@
     <script src="./js/echarts.min.js"></script>
     <script src="https://static.kuaidao.cn/qingteng/wx-js/swiper.jquery.js"></script>
     <script src="js/map/china.js"></script>
-    <script src="json/geoinfo.js"></script>
+    <script src="json/demo.js"></script>
     <script>
         var mainVM = new Vue({
             el: '#wrapper',
@@ -723,7 +715,7 @@
                         series: dataMock.map((item, index) => {
                             return {
                                 type: 'pie',
-                                // clockWise: false,
+                                clockWise: false,
                                 radius: item.radiusArr,
                                 center: ['32%', '50%'],
                                 itemStyle: dataStyle,
@@ -842,7 +834,7 @@
                         series: dataMock.map((item, index) => {
                             return {
                                 type: 'pie',
-                                // clockWise: false,
+                                clockWise: false,
                                 radius: item.radiusArr,
                                 center: ['32%', '50%'],
                                 itemStyle: dataStyle,
@@ -1673,7 +1665,8 @@
                                     show: true,
                                     period: 4,
                                     trailLength: 0,
-                                    symbol: planePath,
+                                    // symbol: planePath,
+                                    symbol: 'arrow', //箭头图标
                                     symbolSize: 15
                                 },
                                 lineStyle: {
@@ -1691,7 +1684,9 @@
                                 coordinateSystem: 'geo',
                                 zlevel: 2,
                                 rippleEffect: {
-                                    brushType: 'stroke'
+                                    period: 4, //动画时间，值越小速度越快
+                                    brushType: 'stroke', //波纹绘制方式 stroke, fill
+                                    scale: 4 //波纹圆环最大限制，值越大波纹越大
                                 },
                                 label: {
                                     normal: {
@@ -1712,6 +1707,7 @@
                                         },
                                     },
                                 },
+                                symbol: 'circle',
                                 symbolSize: function (val) {
                                     // return val[2] / 8;
                                     return 10;
@@ -2305,7 +2301,6 @@
                     var _this = this;
                     axios({
                         method: 'get',
-                        // url: "http://112.126.70.131:8086/operation/info"
                         url: "http://47.94.120.174:8086/operation/info"
                         // url: "http://192.168.60.82:8086/operation/info"
                     }).then(function (res) {
@@ -2495,8 +2490,6 @@
                 this.month = day.getMonth() + 1;
                 this.time = this.dataFormat(); // 当前时间
                 setInterval(() => {
-                    day = new Date(); // 当前月份
-                    this.month = day.getMonth() + 1;
                     this.time = this.dataFormat();
                 }, 1000)
             }
