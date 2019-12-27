@@ -97,8 +97,12 @@
                                 <div class="center-center">
                                     <div class="map-box box">
                                         <div class="circle-wrap">
-                                            <span :class="['sign-circle', num==0?'act':'']"><i></i>签约量</span>
-                                            <span :class="['visit-circle', num==1?'act':'']"><i></i>来访量</span>
+                                            <div :class="['circle-content01', num==0?'act':'']">
+                                                <span class="sign-circle"><i></i>签约量<em></em></span>
+                                            </div>
+                                            <div :class="['circle-content02', num==1?'act':'']">
+                                                <span class="visit-circle"><i></i>来访量<em></em></span>
+                                            </div>
                                         </div>
                                         <div id="map-charts" class="charts"></div>
                                     </div>
@@ -192,8 +196,12 @@
                                 <div class="center-center">
                                     <div class="map-box box">
                                         <div class="circle-wrap">
-                                            <span :class="['sign-circle', num2==0?'act':'']"><i></i>签约量</span>
-                                            <span :class="['visit-circle', num2==1?'act':'']"><i></i>来访量</span>
+                                            <div :class="['circle-content01', num==0?'act':'']">
+                                                <span class="sign-circle"><i></i>签约量<em></em></span>
+                                            </div>
+                                            <div :class="['circle-content02', num==1?'act':'']">
+                                                <span class="visit-circle"><i></i>来访量<em></em></span>
+                                            </div>
                                         </div>
                                         <div id="map-charts2" class="charts"></div>
                                     </div>
@@ -2487,6 +2495,8 @@
                 this.month = day.getMonth() + 1;
                 this.time = this.dataFormat(); // 当前时间
                 setInterval(() => {
+                    day = new Date(); // 当前月份
+                    this.month = day.getMonth() + 1;
                     this.time = this.dataFormat();
                 }, 1000)
             }
