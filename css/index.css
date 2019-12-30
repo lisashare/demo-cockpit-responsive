@@ -104,14 +104,14 @@ body {
   height: 1.625rem;
   line-height: 1.625rem;
   text-align: center;
-  color: #fff;
+  color: #27DBF3;
   cursor: pointer;
 }
 .cockpit-header .header-info-right .active {
-  color: #27DBF3;
+  color: #fff;
 }
 .cockpit-header .header-info-right .active i {
-  background: url('../images/1-1@3x.png') no-repeat;
+  background: url('../images/1-2@3x.png') no-repeat;
   background-size: 100%;
 }
 .cockpit-header .header-info-right li:first-child {
@@ -124,7 +124,7 @@ body {
   width: 1.125rem;
   height: 1.125rem;
   margin-right: 0.25rem;
-  background: url('../images/1-2@3x.png') no-repeat;
+  background: url('../images/1-1@3x.png') no-repeat;
   background-size: 100%;
 }
 .gauge-box {

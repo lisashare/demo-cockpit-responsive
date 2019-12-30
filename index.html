@@ -17,7 +17,7 @@
         <div class="content">
             <div class="cockpit-header">
                 <div class="header-info-left" v-html="time"></div>
-                <h2 @click="handleFullScreen">快道集团驾驶舱</h2>
+                <h2><span @click="handleFullScreen">快道集团驾驶舱</span></h2>
                 <ul class="header-info-right nav-tab">
                     <li :class="index==0?'active':''" @click="slide(0)"><i></i>商机盒子</li>
                     <li :class="index==1?'active':''" @click="slide(1)">小物种</li>
@@ -243,7 +243,9 @@
     <script src="https://static.kuaidao.cn/qingteng/wx-js/swiper.jquery.js"></script>
     <script src="js/map/china.js"></script>
     <script src="json/geoinfo.js"></script>
+    <script src="./mock/data.js"></script>
     <script>
+        var res = DataList;
         var mainVM = new Vue({
             el: '#wrapper',
             data: {
@@ -644,7 +646,6 @@
                             radiusArr: ['63.5%', '75%'],
                             color: '#1b6bee',
                             total: totalNum.totalDayResourceAmount
-
                         },
                         {
                             name: "邀约量",
@@ -654,8 +655,8 @@
                             total: totalNum.totalDayInvitationAmount
                         },
                         {
-                            name: "",
-                            value: call,
+                            name: "", // 没有名字右侧不显示
+                            value: 0, // 值必须是0，圆圈才不显示
                             radiusArr: ['23.5%', '35%'],
                             color: '#e530a3',
                             total: totalNum.totalDayCallAmount
@@ -741,7 +742,7 @@
                                         }
                                     },
                                     {
-                                        value: Number(item.total) - Number(item.value) <= 0 ?item.value:item.total,
+                                        value: (Number(item.total) > Number(item.value) ? item.total:item.value) - item.value,
                                         name: '',
                                         tooltip: {
                                             show: false
@@ -774,7 +775,7 @@
                         },
                         {
                             name: "",
-                            value: call,
+                            value: 0,
                             radiusArr: ['23.5%', '35%'],
                             color: '#e530a3',
                             total: totalNum.totalDayCallAmount
@@ -860,7 +861,7 @@
                                         }
                                     },
                                     {
-                                        value: Number(item.total) - Number(item.value) <= 0 ?item.value:item.total,
+                                        value: (Number(item.total) > Number(item.value) ? item.total:item.value) - item.value,
                                         name: '',
                                         tooltip: {
                                             show: false
@@ -1622,7 +1623,8 @@
                     var planePath =
                         'path://M.6,1318.313v-89.254l-319.9-221.799l0.073-208.063c0.521-84.662-26.629-121.796-63.961-121.491c-37.332-0.305-64.482,36.829-63.961,121.491l0.073,208.063l-319.9,221.799v89.254l330.343-157.288l12.238,241.308l-134.449,92.931l0.531,42.034l175.125-42.917l175.125,42.917l0.531-42.034l-134.449-92.931l12.238-241.308L1705';
                     var convertData = function (data) {
-                        if (!data) {
+                        console.log(data, 11)
+                        if (!(data && data.length)) {
                             return false;
                         }
                         var res = [];
@@ -1630,13 +1632,8 @@
                             var dataItem = data[i];
                             var fromCoord = '';
                             var toCoord = '';
-                            // if (type) {
                                 fromCoord = geoCoordMap[dataItem[0].name];
                                 toCoord = geoCoordMap[dataItem[1].name];
-                            // } else {
-                                // fromCoord = geoCoordMap[dataItem[1].name];
-                                // toCoord = geoCoordMap[dataItem[0].name];
-                            // }
                             if (fromCoord && toCoord) {
                                 res.push([{
                                     coord: fromCoord
@@ -1705,9 +1702,9 @@
                                 label: {
                                     normal: {
                                         show: true,
-                                        textStyle: {
-                                            fontSize: mainVM.fontSize(0.14),
-                                        },
+                                        // textStyle: {
+                                        //     fontSize: mainVM.fontSize(0.14),
+                                        // },
                                         position: 'right',
                                         // formatter: '{b}'
                                         formatter: function (params) { // 圆环显示文字
@@ -1874,9 +1871,9 @@
                                 label: {
                                     normal: {
                                         show: true,
-                                        textStyle: {
-                                            fontSize: mainVM.fontSize(0.14),
-                                        },
+                                        // textStyle: {
+                                        //     fontSize: mainVM.fontSize(0.14),
+                                        // },
                                         position: 'right',
                                         // formatter: '{b}'
                                         formatter: function (params) { // 圆环显示文字
@@ -2295,8 +2292,8 @@
                     return null;
                 },
                 groupArr2(data){
-                    if(!(data && data.length)){return false;}
                     var result = [];
+                    if(!(data && data.length)){return result;}
                     for(var i=0;i<data.length;i++){
                         var arr = [];
                         arr.push(data[i].name);
@@ -2313,13 +2310,13 @@
                     return Math.floor(   Math.random()*( max-min+1 )+min  )*1000  },
                 getJson(type) {
                     var _this = this;
-                    axios({
-                        method: 'get',
-                        // url: "http://112.126.70.131:8086/operation/info"
-                        url: "http://47.94.120.174:8086/operation/info"
-                        // url: "http://192.168.60.82:8086/operation/info"
-                    }).then(function (res) {
-                        var res = JSON.parse(res.data.msg).DataList;
+                    // axios({
+                    //     method: 'get',
+                    //     // url: "http://112.126.70.131:8086/operation/info"
+                    //     url: "http://47.94.120.174:8086/operation/info"
+                    //     // url: "http://192.168.60.82:8086/operation/info"
+                    // }).then(function (res) {
+                    //     var res = JSON.parse(res.data.msg).DataList;
                         console.log('res', res);
                         for (let i = 0; i < res.length; i++) {
                             var json = res[i];
@@ -2447,9 +2444,9 @@
 
                             }
                         }
-                    }).catch(function (error) {
-                        console.log(error);
-                    })
+                    // }).catch(function (error) {
+                    //     console.log(error);
+                    // })
                 },
                 countScroll() {
                     var options = {

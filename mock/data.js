@@ -8,9 +8,9 @@
 		"monthsignamount": "2", // 月签约量
 		"monthsignsingleamount": "2", // 月签约单量
 		"monthsignprice": "2.00", // 月签约金额
-		"dayresourceamount": "200", // 日资源总量
+		"dayresourceamount": "2000", // 日资源总量
 		"daycallamount": "2", // 日通话总量
-		"dayinvitationamount": "2", // 日邀约量
+		"dayinvitationamount": "45", // 日邀约量
 		"daycomeamount": "2", // 日来访量
 		"daysignamount": "2", // 日签约量
 		"daysignsingleamount": "2", // 日签约单量
@@ -22,20 +22,47 @@
 		"daytotalsignsingleamount": "", // 日签约单量 (中)
 		"daytotalsignamount": "", // 日签约量(中)
 		"daytotalsignprice": "", // 日签约金额(中)
-		"mapcomevisitamount": [],
-		"mapsignamount": [],
-		"fromchan": "2" // 小物种
+		"mapcomevisitamount": null,
+		"mapsignamount": [
+			{
+				name: "上海",
+				list: [
+					[
+						{
+							name: "贵州",
+							value: "100",
+							num: ""
+						},
+						{
+							name: "上海"
+						}
+					],
+					[
+						{
+							name: "上海",
+							value: "100",
+							num: "10"
+						},
+						{
+							name: "上海"
+						}
+					]
+					
+				]
+			},
+		],
+		"fromchan": "2" // 商机盒子
 	}, {
 		"monthclewconversation": "",
-		"monthresourceamount": "1000",
+		"monthresourceamount": "1100",
 		"monthinvitationamount": "1000",
 		"monthcomeamount": "1000",
 		"monthsignamount": "1000",
 		"monthsignsingleamount": "1000",
 		"monthsignprice": "1000.00",
-		"dayresourceamount": "1000",
+		"dayresourceamount": "8000",
 		"daycallamount": "1000",
-		"dayinvitationamount": "1000",
+		"dayinvitationamount": "80",
 		"daycomeamount": "1000",
 		"daysignamount": "1000",
 		"daysignsingleamount": "1000",
@@ -47,8 +74,63 @@
 		"daytotalsignsingleamount": "",
 		"daytotalsignamount": "",
 		"daytotalsignprice": "",
-		"mapcomevisitamount": [],
-		"mapsignamount": [],
+		"mapcomevisitamount": [
+			{
+				name: "上海",
+				list: [
+					[
+						{
+							name: "贵州",
+							value: "100",
+							num: ""
+						},
+						{
+							name: "上海"
+						}
+					],
+					[
+						{
+							name: "上海",
+							value: "100",
+							num: "10"
+						},
+						{
+							name: "上海"
+						}
+					]
+					
+				]
+			},
+			
+		],
+		"mapsignamount": [
+			{
+				name: "上海",
+				list: [
+					[
+						{
+							name: "贵州",
+							value: "100",
+							num: ""
+						},
+						{
+							name: "上海"
+						}
+					],
+					[
+						{
+							name: "上海",
+							value: "100",
+							num: "10"
+						},
+						{
+							name: "上海"
+						}
+					]
+					
+				]
+			},
+		],
 		"fromchan": "1"
 	}
 ];
