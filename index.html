@@ -1648,7 +1648,7 @@
                     this.highlight = type;
                     var series = [];
                     var storage = [];
-                    if(parameter.length){
+                    if(parameter && parameter.length){
                         parameter.forEach(function (item, i) {
                             series.push({
                                 name: item[0],
@@ -1854,7 +1854,7 @@
                     this.highlight2 = type;
                     var series = [];
                     var storage = [];
-                    if(parameter2.length){
+                    if(parameter2 && parameter2.length){
                         parameter2.forEach(function (item, i) {
                             series.push({
                                 name: item[0],
